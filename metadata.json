@@ -1,0 +1,6 @@
+{
+  "name": "Tire City",
+  "description": "Modern, premium, high-performance automotive tire and wheel e-commerce store featuring a vehicle-tire compatibility finder, product comparison engine, and checkout.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

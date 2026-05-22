@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-primary: #FF6A00;
+  --color-brand-orange-light: #FF8533;
+  --color-dark-bg: #0F0F10;
+  --color-dark-card: #1B1B1D;
+  --color-dark-surface: #262629;
+}
+
+/* Custom performance-oriented scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F0F10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF6A00;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF8533;
+}
+
+body {
+  background-color: #0F0F10;
+  color: #EAEAEA;
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Neon glow utility */
+.glow-orange {
+  box-shadow: 0 0 15px rgba(255, 106, 0, 0.35);
+}
+
+.glow-orange-lg {
+  box-shadow: 0 0 30px rgba(255, 106, 0, 0.5);
+}
+
+/* Smooth custom transitions */
+.transition-performance {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- PREMIUM LIGHT THEME VARIABLE OVERRIDES SYSTEM --- */
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background-color: #F5F7FA !important;
+  color: #334155 !important;
+}
+
+/* Background overrides via high-compatibility pattern matching */
+html.light [class*="bg-[#0F0F10]"],
+html.light [class*="bg-[#101012]"],
+html.light [class*="bg-[#0c0c0e]"],
+html.light [class*="bg-zinc-900"],
+html.light [class*="bg-[#101012]/10"],
+html.light [class*="bg-black/40"] {
+  background-color: #F8FAFC !important;
+}
+
+/* Top Hero section and general layout frames */
+html.light section.relative.w-full.bg-gradient-to-b {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F7FA 100%) !important;
+}
+
+/* Main Premium Cards, Panels, Drawers, and Dialogs */
+html.light [class*="bg-[#1B1B1D]"] {
+  background-color: #FFFFFF !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05) !important;
+  color: #334155 !important;
+}
+
+html.light [class*="bg-[#262629]"] {
+  background-color: #E2E8F0 !important;
+}
+
+/* Ensure the fixed overlay backdrops (like drawer dim screen and menus) do not turn solid white! */
+html.light .fixed.inset-0.bg-black\/75 {
+  background-color: rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Universal Borders */
+html.light [class*="border-[#262629]"],
+html.light [class*="border-zinc-800"],
+html.light [class*="border-[#262629]/50"],
+html.light [class*="border-[#262629]/55"],
+html.light [class*="border-[#262629]/60"],
+html.light [class*="border-[#262629]/70"],
+html.light [class*="border-[#262629]/80"] {
+  border-color: #E2E8F0 !important;
+}
+
+/* Universal Typography Element Contrast Shifting */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6,
+html.light .text-white,
+html.light [class*="text-white"],
+html.light [class*="text-zinc-200"],
+html.light [class*="text-neutral-250"] {
+  color: #0F172A !important;
+}
+
+html.light [class*="text-[#EAEAEA]"] {
+  color: #334155 !important;
+}
+
+html.light [class*="text-gray-300"],
+html.light [class*="text-zinc-300"],
+html.light [class*="text-neutral-300"] {
+  color: #475569 !important;
+}
+
+html.light [class*="text-gray-400"],
+html.light [class*="text-zinc-400"],
+html.light [class*="text-neutral-400"] {
+  color: #64748B !important;
+}
+
+html.light [class*="text-gray-500"],
+html.light [class*="text-zinc-500"],
+html.light [class*="text-neutral-500"] {
+  color: #94A3B8 !important;
+}
+
+/* Interactive elements and interactive tables rows */
+html.light tr.border-b:hover,
+html.light [class*="hover:bg-white/5"]:hover {
+  background-color: #F1F5F9 !important;
+}
+
+/* Special badges, links and icons that should retain high-contrast brand details */
+html.light button.bg-\[\#FF6A00\],
+html.light [class*="bg-[#FF6A00]"] button,
+html.light [class*="bg-[#FF6A00]"] span,
+html.light span.bg-\[\#FF6A00\],
+html.light div.bg-\[\#FF6A00\] *,
+html.light button.bg-\[\#FF6A00\] *,
+html.light [class*="bg-[#FF6A00]"] {
+  color: #000000 !important;
+}
+
+html.light .bg-black span {
+  color: #334155 !important;
+}
+
+/* Structured Support Badges & Visuals */
+html.light .bg-orange-50 {
+  background-color: #FFF7ED !important;
+}
+
+html.light .text-emerald-400 {
+  color: #059669 !important;
+}
+
+/* Form Fields & select control menus */
+html.light input,
+html.light select,
+html.light textarea {
+  background-color: #FFFFFF !important;
+  color: #1E293B !important;
+  border-color: #CBD5E1 !important;
+}
+
+html.light input:focus,
+html.light select:focus,
+html.light textarea:focus {
+  border-color: #FF6A00 !important;
+  outline: none;
+}
+
+/* Interactive Custom Scrollbars in Light Mode */
+html.light ::-webkit-scrollbar-track {
+  background: #F1F5F9 !important;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #CBD5E1 !important;
+  border-radius: 4px;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8 !important;
+}
+
+
