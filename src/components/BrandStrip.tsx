@@ -1,11 +1,13 @@
 import { BRANDS } from '../data';
+import { BrandLogo } from '../types';
 
 interface BrandStripProps {
   onBrandSelect: (brandName: string) => void;
   selectedBrand?: string;
+  brandsList?: BrandLogo[];
 }
 
-export default function BrandStrip({ onBrandSelect, selectedBrand }: BrandStripProps) {
+export default function BrandStrip({ onBrandSelect, selectedBrand, brandsList = BRANDS }: BrandStripProps) {
   // Brand color/styling mapper to make them look authentic
   const getBrandLogoStyle = (id: string) => {
     switch (id) {
@@ -64,11 +66,11 @@ export default function BrandStrip({ onBrandSelect, selectedBrand }: BrandStripP
     <div className="w-full">
       <div className="flex flex-col gap-3">
         <h3 className="text-xs font-mono tracking-widest text-[#FF6A00] uppercase font-bold text-center">
-          ⚡ AUTHORIZED HIGH-PERFORMANCE ORIGINAL EQUIPMENT DISTRIBUTOR
+          ⚡ YETKİLİ YÜKSEK PERFORMANS ORİJİNAL EKİPMAN DİSTRİBÜTÖRÜ
         </h3>
         
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
-          {BRANDS.map((brand) => {
+          {brandsList.map((brand) => {
             const style = getBrandLogoStyle(brand.id);
             const isSelected = selectedBrand === brand.name;
             
@@ -82,10 +84,19 @@ export default function BrandStrip({ onBrandSelect, selectedBrand }: BrandStripP
                     : 'border-gray-200 hover:scale-[1.04] hover:shadow-lg hover:border-[#FF6A00]'
                 }`}
               >
-                <div className="flex items-center justify-center h-8">
-                  <span className={`${style.textColor} ${style.font} ${style.accent} text-sm md:text-base`}>
-                    {brand.textLogo}
-                  </span>
+                <div className="flex items-center justify-center h-8 w-full">
+                  {brand.logoUrl ? (
+                    <img
+                      src={brand.logoUrl}
+                      alt={brand.name}
+                      className="max-h-8 max-w-full object-contain"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <span className={`${style.textColor} ${style.font} ${style.accent} text-sm md:text-base`}>
+                      {brand.textLogo}
+                    </span>
+                  )}
                 </div>
                 
                 <span className="text-[8px] font-mono tracking-wider text-gray-500 mt-1 uppercase text-center truncate w-full">
@@ -94,7 +105,7 @@ export default function BrandStrip({ onBrandSelect, selectedBrand }: BrandStripP
 
                 {isSelected && (
                   <span className="mt-1 text-[8px] font-bold text-[#FF6A00] uppercase tracking-wider font-mono">
-                    ✓ Selected Filter
+                    ✓ Seçili Filtre
                   </span>
                 )}
               </div>

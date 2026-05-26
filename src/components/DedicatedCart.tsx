@@ -33,12 +33,12 @@ export default function DedicatedCart({
     const codeClean = promoCode.trim().toUpperCase();
     if (codeClean === 'TIRECITY10') {
       setActiveDiscount(10);
-      setPromoSuccess('Promo Code TIRECITY10 Claimed! 10% Off Tire Compounds Applied.');
+      setPromoSuccess('Kupon TIRECITY10 uygulandı! %10 sepet indirimi yansıtıldı.');
     } else if (codeClean === 'FREEINSTALL') {
       setActiveDiscount(5); // mock alternative
-      setPromoSuccess('Promo Code FREEINSTALL Claimed! Special discount added.');
+      setPromoSuccess('Kupon FREEINSTALL uygulandı! Özel indirim eklendi.');
     } else {
-      setPromoError('Invalid coupon sequence. Try entering TIRECITY10.');
+      setPromoError('Geçersiz kupon kodu. TIRECITY10 yazarak şansınızı deneyin.');
     }
   };
 
@@ -68,10 +68,10 @@ export default function DedicatedCart({
         <div>
           <h2 className="font-display font-black text-3xl text-white dark:text-white light:text-slate-900 tracking-tight uppercase flex items-center gap-3">
             <ShoppingCart className="w-8 h-8 text-[#FF6A00]" />
-            Your Shopping Cart
+            Alışveriş Sepetiniz
           </h2>
           <p className="text-xs font-mono text-gray-400 mt-1 uppercase tracking-wider">
-            Reviewing {totalItemsCount} performance tires before scheduling mobile alignment
+            Montaj ve randevu öncesi sepetinizde {totalItemsCount} adet kapıda kurulum uyumlu lastik bulunuyor
           </p>
         </div>
 
@@ -80,7 +80,7 @@ export default function DedicatedCart({
             onClick={onClearCart}
             className="px-3.5 py-1.5 bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-mono uppercase rounded hover:bg-red-500 hover:text-white transition-all font-bold"
           >
-            Purge Current Cart
+            Sepeti Temizle
           </button>
         )}
       </div>
@@ -88,15 +88,15 @@ export default function DedicatedCart({
       {cartItems.length === 0 ? (
         <div className="py-24 text-center border border-dashed border-[#262629] rounded-xl bg-[#1B1B1D]/20 max-w-2xl mx-auto my-8">
           <ShoppingCart className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-          <h3 className="font-display font-bold text-lg text-white">Your Cart is Currently Empty</h3>
+          <h3 className="font-display font-bold text-lg text-white">Sepetiniz Şu Anda Boş</h3>
           <p className="text-xs text-gray-400 font-mono mt-2 max-w-sm mx-auto leading-relaxed">
-            You haven&rsquo;t configured any performance compounds yet. Head over to the shop catalog to select your offset details.
+            Sürüş tarzınıza ve aracınıza uygun bir lastik yapılandırması henüz sepetinizde yok. İhtiyacınız olan ürünleri seçmek için mağaza kataloğuna gözatın.
           </p>
           <button
             onClick={() => onNavigateTab('shop')}
             className="mt-6 px-6 py-3 bg-[#FF6A00] text-black font-display font-black text-xs uppercase tracking-widest rounded hover:bg-[#FF8533] transition-all hover:scale-105"
           >
-            BROWSE TIRE CATALOG
+            LASTİK KATALOĞUNA GÖZAT
           </button>
         </div>
       ) : (
@@ -129,13 +129,13 @@ export default function DedicatedCart({
 
                         <div>
                           <span className="text-[10px] text-gray-400 font-mono tracking-wider block font-bold uppercase">
-                            {item.product.brand} Blueprints
+                            {item.product.brand} Detayları
                           </span>
                           <h4 className="font-display font-extrabold text-white dark:text-white light:text-slate-900 text-sm uppercase leading-tight mt-0.5">
                             {item.product.model}
                           </h4>
                           <span className="text-[10.5px] font-mono text-gray-500 block mt-1 uppercase">
-                            Diameter Sizing: <span className="text-white dark:text-white light:text-slate-800 font-bold font-sans">{item.selectedSize}</span>
+                            Seçilen Çap / Ebat: <span className="text-white dark:text-white light:text-slate-800 font-bold font-sans">{item.selectedSize}</span>
                           </span>
                         </div>
                       </div>
@@ -160,18 +160,18 @@ export default function DedicatedCart({
                             +
                           </button>
                         </div>
-
+ 
                         {/* Flat pricing total */}
                         <div className="text-right">
-                          <span className="text-[10px] text-gray-500 font-mono block">TIRE SUBTOTAL</span>
+                          <span className="text-[10px] text-gray-500 font-mono block">LASTİK BEDELİ</span>
                           <span className="text-sm font-bold font-mono text-white dark:text-white light:text-slate-800">${itemTotal.toFixed(2)}</span>
-                          <span className="text-[10px] block text-gray-500 mt-0.5">${item.product.price} each</span>
+                          <span className="text-[10px] block text-gray-500 mt-0.5">Adet Fiyatı: ${item.product.price}</span>
                         </div>
 
                         <button
                           onClick={() => onRemoveItem(item.product.id)}
                           className="p-2 text-gray-500 hover:text-red-500 transition-colors"
-                          title="Purge tire from cart"
+                          title="Lastiği sepetten çıkar"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -185,21 +185,21 @@ export default function DedicatedCart({
                         <Wrench className="w-5 h-5 text-[#FF6A00] flex-shrink-0 mt-0.5" />
                         <div>
                           <h5 className="font-bold text-xs text-white dark:text-white light:text-slate-900 font-sans uppercase">
-                            Home Mobilization Installation Suite
+                            Kapıda Mobil Montaj ve Kurulum Hizmeti
                           </h5>
                           <p className="text-[11px] text-gray-400 leading-normal font-sans mt-0.5">
-                            Our high-calibration mobile mechanics dispatch trucks to fit this set in your driveway. Includes dynamic laser road-force balancing + high-end stem valves.
+                            Özel kalibrasyonlu mobil montaj araçlarımız adresinize gelerek lastik montajını gerçekleştirir. Balans ayarı, yeni çinko alaşım supap değişimleri fiyata dahildir.
                           </p>
                         </div>
                       </div>
 
                       <div className="flex items-center gap-3 w-full sm:w-auto justify-between border-t sm:border-t-0 border-[#262629]/50 dark:border-[#262629]/40 light:border-slate-100 pt-2 sm:pt-0">
                         <div className="text-left sm:text-right">
-                          <span className="text-[9px] text-gray-500 font-mono block">ASSEMBLY FEE</span>
+                          <span className="text-[9px] text-gray-500 font-mono block">MONTAJ BEDELİ</span>
                           <span className="text-xs font-bold font-mono text-emerald-400">
                             ${(item.installationCost * item.qty).toFixed(2)}
                           </span>
-                          <span className="text-[9px] text-gray-500 block font-mono">(${item.installationCost} /tire)</span>
+                          <span className="text-[9px] text-gray-500 block font-mono">(${item.installationCost} / adet)</span>
                         </div>
 
                         <label className="relative inline-flex items-center cursor-pointer">
@@ -229,7 +229,7 @@ export default function DedicatedCart({
               className="flex items-center gap-2 text-xs font-mono font-bold text-[#FF6A00] hover:underline"
             >
               <ArrowLeft className="w-4 h-4 animate-swipeLeft" />
-              CONTINUE SEARCHING IN STOREHOUSE
+              LASTİK KATALOĞUNDA ARAMAYA DEVAM ET
             </button>
 
           </div>
@@ -241,13 +241,13 @@ export default function DedicatedCart({
             <div className="bg-[#1B1B1D] dark:bg-[#1B1B1D] light:bg-[#FFFFFF] border border-[#262629] dark:border-[#262629] light:border-slate-200 rounded-xl p-5 shadow-sm text-left space-y-4">
               <h4 className="text-xs font-mono font-bold text-gray-400 dark:text-gray-400 light:text-slate-500 uppercase tracking-widest flex items-center gap-1.5 border-b border-[#262629]/40 dark:border-[#262629]/40 light:border-slate-100 pb-2">
                 <Percent className="w-4 h-4 text-[#FF6A00]" />
-                Apply Coupon Code
+                Kupon Kodu Uygula
               </h4>
 
               <form onSubmit={handleApplyPromo} className="flex gap-2">
                 <input
                   type="text"
-                  placeholder="Enter Code (e.g. TIRECITY10)"
+                  placeholder="Kupon Girin (Örn: TIRECITY10)"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
                   className="flex-1 bg-[#101012] text-xs text-white p-2.5 rounded border border-[#262629] focus:outline-none focus:border-[#FF6A00] font-mono"
@@ -256,7 +256,7 @@ export default function DedicatedCart({
                   type="submit"
                   className="px-4 py-2 bg-[#262629] hover:bg-[#FF6A00] hover:text-black font-mono font-bold text-xs uppercase rounded text-white transition-colors border border-[#262629]"
                 >
-                  Apply
+                  Uygula
                 </button>
               </form>
 
@@ -273,50 +273,50 @@ export default function DedicatedCart({
               )}
 
               <p className="text-[9.5px] text-gray-500 font-mono text-left">
-                💡 TIP: Enter coupon <strong className="text-white">TIRECITY10</strong> to get 10% discount off tire compounds instantly.
+                💡 İPUCU: Lastiklerde anında %10 indirim almak için <strong className="text-white">TIRECITY10</strong> kuponunu yazın.
               </p>
             </div>
 
             {/* Price sheet container */}
             <div className="bg-[#1B1B1D] dark:bg-[#1B1B1D] light:bg-[#FFFFFF] border border-[#262629] dark:border-[#262629] light:border-slate-200 rounded-xl p-5 shadow-sm text-left space-y-4">
               <h4 className="text-xs font-mono font-bold text-gray-400 dark:text-gray-400 light:text-slate-500 uppercase tracking-widest border-b border-[#262629]/50 dark:border-[#262629]/50 light:border-slate-100 pb-2">
-                Bill Summary
+                Fatura Özeti
               </h4>
 
               <div className="space-y-2.5 font-mono text-xs">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Tire Compounds Total</span>
+                  <span className="text-gray-500">Lastik Toplam Tutarı</span>
                   <span className="text-white dark:text-white light:text-slate-800 font-bold">${tiresSubtotal.toFixed(2)}</span>
                 </div>
 
                 {activeDiscount > 0 && (
                   <div className="flex justify-between text-emerald-400">
-                    <span>Coupon Discount (-{activeDiscount}%)</span>
+                    <span>Kupon İndirimi (-%{activeDiscount})</span>
                     <span>-${discountAmount.toFixed(2)}</span>
                   </div>
                 )}
 
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Driveway Mobile Service</span>
+                  <span className="text-gray-500">Mobil Kapıda Kurulum Hizmeti</span>
                   {installationSubtotal > 0 ? (
                     <span className="text-white dark:text-white light:text-slate-800 font-bold">${installationSubtotal.toFixed(2)}</span>
                   ) : (
-                    <span className="text-gray-500 uppercase">Self Pickup ($0.00)</span>
+                    <span className="text-gray-500 uppercase">Yalnızca Teslimat ($0.00)</span>
                   )}
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Environmental Tire Tax</span>
+                  <span className="text-gray-500">Lastik Geri Dönüşüm Katılım Payı (GEKAP)</span>
                   <span className="text-white dark:text-white light:text-slate-800 font-bold">${disposalFees.toFixed(2)}</span>
                 </div>
 
                 <div className="flex justify-between pb-3.5 border-b border-[#262629]/50 dark:border-[#262629]/40 light:border-slate-100">
-                  <span className="text-gray-500">Estimated State Taxes (8%)</span>
+                  <span className="text-gray-500">KDV / Kasa Vergisi (%8)</span>
                   <span className="text-white dark:text-white light:text-slate-800 font-bold">${stateTaxes.toFixed(2)}</span>
                 </div>
 
                 <div className="flex justify-between text-base items-baseline pt-1">
-                  <span className="text-white dark:text-white light:text-slate-900 font-bold font-sans">Final Total</span>
+                  <span className="text-white dark:text-white light:text-slate-900 font-bold font-sans">Genel Toplam</span>
                   <span className="text-xl font-bold text-[#FF6A00] font-mono">${finalCartTotal.toFixed(2)}</span>
                 </div>
               </div>
@@ -326,13 +326,13 @@ export default function DedicatedCart({
                 onClick={() => onNavigateTab('checkout')}
                 className="w-full flex items-center justify-center gap-2 py-4 bg-[#FF6A00] text-black font-display font-black text-xs uppercase tracking-widest rounded hover:bg-[#FF8533] hover:scale-103 active:scale-97 transition-all glow-orange"
               >
-                Proceed to Checkout Desk
+                Ödeme Ekranına İlerle
                 <ChevronRight className="w-4 h-4 stroke-[3.5]" />
               </button>
 
               <div className="flex items-center gap-2 text-[10px] text-gray-500 font-mono mt-2 pt-2 border-t border-[#262629]/40 dark:border-[#262629]/40 light:border-slate-100 justify-center">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>SSL Secured Checkout Vault</span>
+                <span>SSL Secured &bull; 256-bit Güvenli Ödeme Altyapısı</span>
               </div>
             </div>
 

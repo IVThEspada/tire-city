@@ -285,7 +285,7 @@ export default function ShopSidebar({
           <span>BAHAR KAMPANYASI</span>
         </div>
         <p className="leading-relaxed text-[9px]">
-          4 adet lastik alımında kapıda ücretsiz balans ve montaj ayarı! Hızlı teslimat güvencesi.
+          4 adet lastik alımında kapıda profesyonel balans ve montaj hizmeti! Hızlı teslimat güvencesi.
         </p>
       </div>
 

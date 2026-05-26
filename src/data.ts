@@ -6,13 +6,13 @@ export const IMAGE_PRODUCT_TIRE = '/src/assets/images/product_tire_wheel_1779310
 export const IMAGE_TREAD_BG = '/src/assets/images/tire_tread_bg_1779311013616.png';
 
 export const BRANDS: BrandLogo[] = [
-  { id: 'michelin', name: 'Michelin', textLogo: 'MICHELIN', subText: 'A Better Way Forward' },
-  { id: 'continental', name: 'Continental', textLogo: 'CONTINENTAL', subText: 'The Future in Motion' },
-  { id: 'pirelli', name: 'Pirelli', textLogo: 'PIRELLI', subText: 'Power Is Nothing Without Control' },
-  { id: 'goodyear', name: 'Goodyear', textLogo: 'GOODYEAR', subText: 'More Driven' },
-  { id: 'bridgestone', name: 'Bridgestone', textLogo: 'BRIDGESTONE', subText: 'Solutions for your journey' },
-  { id: 'yokohama', name: 'Yokohama', textLogo: 'YOKOHAMA', subText: 'High Performance Tires' },
-  { id: 'falken', name: 'Falken', textLogo: 'FALKEN', subText: 'On the Pulse of Wet Performance' },
+  { id: 'michelin', name: 'Michelin', textLogo: 'MICHELIN', subText: 'Daha İyi Bir Geleceğe Doğru', description: 'Ağır pist yüklerini desteklemek için tasarlanmış çoklu kauçuk bileşenlerin ve dinamik biyomekanik filtrelerin öncüleri.' },
+  { id: 'continental', name: 'Continental', textLogo: 'CONTINENTAL', subText: 'Gelecek Harekette', description: 'Alman hassas tasarım standartları. Yol Gücü uyumluluğu ve iç gürültü engelleme katmanlarında uzmanlaşmıştır.' },
+  { id: 'pirelli', name: 'Pirelli', textLogo: 'PIRELLI', subText: 'Kontrolsüz Güç Güç Değildir', description: 'Formula 1 resmi orijinal ekipman tedarikçisi. Ultra yüksek hız dereceleri ve zorlu viraj G Kuvvetleri için formüle edilmiştir.' },
+  { id: 'goodyear', name: 'Goodyear', textLogo: 'GOODYEAR', subText: 'Daha Sürücü Odaklı', description: 'Mükemmel kilometre performansı ve ıslak kuru zemin dengesi. İnovatif sırt deseni teknolojisiyle sürüş güvenliğini maksimize eder.' },
+  { id: 'bridgestone', name: 'Bridgestone', textLogo: 'BRIDGESTONE', subText: 'Yolculuğunuz için çözümler', description: 'Japon mühendisliğiyle üretilmiş yüksek dayanıklılık ve konfor. Optimum frenleme mesafesi ve sessiz sürüş deneyimi sunar.' },
+  { id: 'yokohama', name: 'Yokohama', textLogo: 'YOKOHAMA', subText: 'Yüksek Performanslı Lastikler', description: 'Yarış pistlerinden ilham alan yüksek hız kararlılığı. Islak yüzeylerde mükemmel kavrama ve su tahliyesi sağlar.' },
+  { id: 'falken', name: 'Falken', textLogo: 'FALKEN', subText: 'Islak Zeminde Performansın Nabzı', description: 'Zorlu yol şartlarında yüksek seviyede tepki ve üstün kontrol. Genç ve dinamik sürüş ruhunu destekleyen özel kauçuk yapısı.' },
 ];
 
 export const PRODUCTS: TireProduct[] = [
@@ -34,7 +34,7 @@ export const PRODUCTS: TireProduct[] = [
     speedRating: 'Y',
     loadIndex: '100',
     specs: {
-      warranty: '50,000 Miles',
+      warranty: '80.000 KM',
       wetGrip: 'A',
       fuelEfficiency: 'B',
       noiseLevel: 70,
@@ -44,15 +44,15 @@ export const PRODUCTS: TireProduct[] = [
       treadDepth: '10/32"',
       runflat: false,
     },
-    description: 'The ExtremeContact DWS06 Plus is an ultra-high performance summer and dry-handling champion. Designed for sports cars, high-performance sedans, and luxury sport crossovers, this tire sets the benchmark for wet and dry grip. Features SportPlus+ technology which advances tread life, provides exceptional handling, and guarantees absolute control on dry and wet surfaces alike.',
+    description: 'ExtremeContact DWS06 Plus, ultra yüksek performanslı yaz ve kuru zemin yol tutuş kulvarının şampiyonudur. Spor arabalar, yüksek performanslı sedanlar ve lüks spor crossover araçlar için tasarlanan bu lastik, ıslak ve kuru zemin kavrayışında yeni standartları belirliyor. Diş ömrünü uzatan, sıra dışı bir yol tutuş sunan ve hem kuru hem ıslak yüzeylerde mutlak kontrolü garanti eden SportPlus+ teknolojisine sahiptir.',
     reviews: [
       {
         id: 'rev-1',
         user: 'Chase M.',
         rating: 5,
         date: '2026-04-12',
-        title: 'Outstanding performance on my BMW M4',
-         comment: 'The dry grip is phenomenal! Cornering feels on absolute rails and they channel water exceptionally well during typical heavy structural downpours. Quiet, track-ready quality.',
+        title: 'BMW M4 aracımda olağanüstü performans',
+        comment: 'Kuru zemin tutuşu muazzam! Virajlarda adeta ray üzerindeymişsiniz gibi hissettiriyor ve yoğun sağanak yağmurlarda suyu olağanüstü bir şekilde tahliye ediyor. Sessiz, piste hazır kalite.',
         verified: true,
         helpfulCount: 42,
       },
@@ -61,8 +61,8 @@ export const PRODUCTS: TireProduct[] = [
         user: 'Vikram S.',
         rating: 4,
         date: '2026-04-28',
-        title: 'Sticky and reliable, slightly firm ride',
-        comment: 'Absolutely love the steering responsiveness. You can feel the road perfectly. The road noise is minimal, but the ride can feel slightly stiff over high-speed expressway seams.',
+        title: 'Yola iyi yapışıyor ve güvenilir, sürüş biraz sert',
+        comment: 'Direksiyon hassasiyetine kesinlikle bayılıyorum. Yolu mükemmel bir şekilde hissedebiliyorsunuz. Yol gürültüsü minimum düzeyde, ancak otobandaki bağlantı noktalarında sürüş biraz sert hissettirebilir.',
         verified: true,
         helpfulCount: 15,
       }
@@ -86,7 +86,7 @@ export const PRODUCTS: TireProduct[] = [
     speedRating: 'Y',
     loadIndex: '104',
     specs: {
-      warranty: '30,000 Miles',
+      warranty: '50.000 KM',
       wetGrip: 'A',
       fuelEfficiency: 'C',
       noiseLevel: 71,
@@ -96,15 +96,15 @@ export const PRODUCTS: TireProduct[] = [
       treadDepth: '9.5/32"',
       runflat: false,
     },
-    description: 'The Michelin Pilot Sport 4S is the undisputed king of performance tires, born from endurance racing pedigree. Built using Michelin Multi-Compound Technology, it uses different elastomer combinations across the tread surface for maximum adhesion. Ideal for premium supercars, high-power track builds, and competitive environments.',
+    description: 'Michelin Pilot Sport 4S, dayanıklılık yarışı kökeninden gelen, performans lastiklerinin tartışmasız kralıdır. Michelin Çoklu Bileşen Teknolojisi kullanılarak üretilen bu lastik, maksimum yapışma sağlamak için sırt yüzeyi genelinde farklı elastomer kombinasyonları kullanır. Premium süper arabalar, yüksek güçlü pist araçları ve rekabetçi ortamlar için idealdir.',
     reviews: [
       {
         id: 'rev-m1',
         user: 'Alexander P.',
         rating: 5,
         date: '2026-05-01',
-        title: 'Perfect for Taycan Turbo S',
-        comment: 'Instant power delivery with zero spin. The rubber compound literally glues itself to the concrete. Best tire I have ever bought, completely worth every single dollar.',
+        title: 'Taycan Turbo S için mükemmel',
+        comment: 'Sıfır patinaj ile anında güç aktarımı. Kauçuk bileşeni adeta asfalta yapışıyor. Şimdiye kadar satın aldığım en iyi lastik, ödediğim her kuruşa sonuna kadar değer.',
         verified: true,
         helpfulCount: 89,
       }
@@ -127,7 +127,7 @@ export const PRODUCTS: TireProduct[] = [
     speedRating: 'W',
     loadIndex: '101',
     specs: {
-      warranty: '40,000 Miles',
+      warranty: '65.000 KM',
       wetGrip: 'B',
       fuelEfficiency: 'B',
       noiseLevel: 69,
@@ -137,15 +137,15 @@ export const PRODUCTS: TireProduct[] = [
       treadDepth: '11/32"',
       runflat: true,
     },
-    description: 'Pirelli P Zero Winter brings top-tier racing performance to freezing snow profiles. Formulated with customized high-silica rubber compounds, it remains pliable in extreme arctic temperatures while utilizing a technical asymmetric tread layout for unmatched safety, stability, and control.',
+    description: 'Pirelli P Zero Winter, dondurucu kar zeminlerinde üst düzey yarış performansı sunar. Özel yüksek silikalı kauçuk bileşikleriyle formüle edilmiş olup, aşırı kutup sıcaklıklarında dahi yumuşaklığını korurken benzersiz güvenlik, stabilite ve kontrol için teknik asimetrik sırt tasarımından yararlanır.',
     reviews: [
       {
         id: 'rev-p1',
         user: 'Sven K.',
         rating: 5,
         date: '2026-01-15',
-        title: 'Absolute confidence on mountain snow',
-        comment: 'I live in Colorado and take alpine passes twice a week. These tires hold like nothing else. Minimal slide on heavy compact snow. Exceptional brake safety.',
+        title: 'Dağ karlarında mutlak güven',
+        comment: 'Dağlık bölgelerde yaşıyorum ve haftada iki kez geçitlerden geçiyorum. Bu lastikler eşsiz bir tutuş sunuyor. Yoğun sıkıştırılmış kar üzerinde minimum kayma. Olağanüstü fren güvenliği.',
         verified: true,
         helpfulCount: 23,
       }
@@ -168,7 +168,7 @@ export const PRODUCTS: TireProduct[] = [
     speedRating: 'W',
     loadIndex: '95',
     specs: {
-      warranty: 'Limited track wear',
+      warranty: 'Sınırlı Pist Garantisi',
       wetGrip: 'A',
       fuelEfficiency: 'D',
       noiseLevel: 73,
@@ -178,15 +178,15 @@ export const PRODUCTS: TireProduct[] = [
       treadDepth: '8/32"',
       runflat: false,
     },
-    description: 'The ADVAN Neova AD09 features an aggressive casing structure optimized for premium track days. Its massive contiguous shoulder blocks reduce squirm under heavy side loads, while the specialized motorsport-grade compound heats up instantly to provide extreme thermal threshold performance.',
+    description: 'ADVAN Neova AD09, premium pist günleri için optimize edilmiş agresif bir gövde yapısına sahiptir. Dev blok omuz yapısı, yüksek yanal yükler altında esnemeyi azaltırken, özel motor sporları sınıfı bileşeni anında ısınarak sıradışı termik eşik performansı sağlar.',
     reviews: [
       {
         id: 'rev-y1',
         user: 'Dominic T.',
         rating: 5,
         date: '2026-05-18',
-        title: 'Street legal racing slick feel',
-        comment: 'These tires are insane. Cornering limits are basically unreachable on normal public streets. Warm them up for a lap and they provide supreme track telemetry.',
+        title: 'Yol izni olan yarış lastiği hissi',
+        comment: 'Bu lastikler inanılmaz. Normal kamu yollarında viraj limitlerine ulaşmak neredeyse imkansız. Bir tur ısıtın ve size muazzam bir pist telemetrisi sunacaktır.',
         verified: true,
         helpfulCount: 54,
       }
@@ -210,7 +210,7 @@ export const PRODUCTS: TireProduct[] = [
     speedRating: 'Y',
     loadIndex: '98',
     specs: {
-      warranty: '45,000 Miles',
+      warranty: '70.000 KM',
       wetGrip: 'A',
       fuelEfficiency: 'C',
       noiseLevel: 68,
@@ -220,7 +220,7 @@ export const PRODUCTS: TireProduct[] = [
       treadDepth: '10/32"',
       runflat: false,
     },
-    description: 'The Goodyear Eagle Exhilarate is premium-class luxury meets performance. Engineered to handle high acceleration, intense braking, and severe wet curves. Offers active braking technology that reduces braking distance on both wet and dry pavements.',
+    description: 'Goodyear Eagle Exhilarate, lüks sınıf kalitenin yüksek performansla buluştuğu noktadır. Yüksek hızlanma, yoğun frenleme ve virajlı ıslak zeminlerle başa çıkmak üzere tasarlanmıştır. Hem ıslak hem kuru asfalt üzerinde fren mesafesini azaltan aktif frenleme teknolojisi sunar.',
     reviews: []
   },
   {
@@ -240,7 +240,7 @@ export const PRODUCTS: TireProduct[] = [
     speedRating: 'S',
     loadIndex: '121',
     specs: {
-      warranty: '60,000 Miles',
+      warranty: '95.000 KM',
       wetGrip: 'B',
       fuelEfficiency: 'C',
       noiseLevel: 72,
@@ -250,7 +250,7 @@ export const PRODUCTS: TireProduct[] = [
       treadDepth: '14/32"',
       runflat: false,
     },
-    description: 'Designed for heavy work trucks, standard Jeeps, and dynamic offroad builds, the Dueler A/T Revo 3 provides severe traction on and off-road. Features deep staggered grooves and robust sidewall teeth that resist punctures from jagged gravel or branches.',
+    description: 'Ağır iş kamyonları, standart Jeep modelleri ve dinamik arazi araçları için tasarlanan Dueler A/T Revo 3, yolda ve arazide zorlu çekiş koşullarında üstün performans sağlar. Pürüzlü çakıl veya dallardan kaynaklanan delinmelere karşı direnç gösteren derin kademeli oluklar ve sağlam yanak dişlerine sahiptir.',
     reviews: []
   },
   {
@@ -271,7 +271,7 @@ export const PRODUCTS: TireProduct[] = [
     speedRating: 'T',
     loadIndex: '115',
     specs: {
-      warranty: '55,000 Miles',
+      warranty: '90.000 KM',
       wetGrip: 'A',
       fuelEfficiency: 'D',
       noiseLevel: 70,
@@ -281,7 +281,7 @@ export const PRODUCTS: TireProduct[] = [
       treadDepth: '13/32"',
       runflat: false,
     },
-    description: 'Falken Wildpeak A/T3W combines legendary offroad longevity with high asphalt composure. Optimized tread design prevents stone trapping and guarantees perfect highway tracking in heavy mountain winter blizzards. Backed by 3D canyon sipes for ultimate safety.',
+    description: 'Falken Wildpeak A/T3W, efsanevi arazi dayanıklılığını yüksek asfalt sürüş kalitesi ile birleştirir. Optimize edilmiş sırt tasarımı, taş sıkışmasını önler ve yoğun dağ kış fırtınalarında mükemmel otoyol takibini garanti eder. Üstün güvenlik için 3D kanyon kılcal kanalları ile desteklenmiştir.',
     reviews: []
   }
 ];

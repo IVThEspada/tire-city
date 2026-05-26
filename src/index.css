@@ -201,4 +201,89 @@ html.light ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8 !important;
 }
 
+/* --- PROFILE VIEW THEME ALIGNMENTS & DAMPENING --- */
+.profile-banner {
+  background: linear-gradient(135deg, #1B1B1D 0%, #262629 50%, #101012 100%);
+}
+.profile-gradient-card {
+  background: linear-gradient(135deg, #1B1B1D 0%, #101012 100%);
+}
+.profile-gold-card {
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.4) 0%, rgba(16, 16, 18, 0.4) 100%);
+}
+
+html.light .profile-banner {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%) !important;
+  color: #0F172A !important;
+}
+html.light .profile-gradient-card {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%) !important;
+  color: #334155 !important;
+}
+html.light .profile-gold-card {
+  background: linear-gradient(135deg, #EEF2F6 0%, #E2E8F0 100%) !important;
+  color: #334155 !important;
+}
+
+/* --- HOME SLIDER FLOATING BADGE CARD THEME ALIGNMENT --- */
+.slider-badge-card {
+  background-color: #0A0A0B !important;
+  border: 1px solid #262629 !important;
+}
+.slider-badge-card .badge-label {
+  color: #94A3B8 !important;
+}
+.slider-badge-card .badge-value {
+  color: #FFFFFF !important;
+}
+
+html.light .slider-badge-card {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05) !important;
+}
+html.light .slider-badge-card .badge-label {
+  color: #64748B !important;
+}
+html.light .slider-badge-card .badge-value {
+  color: #0F172A !important;
+}
+
+/* --- ABOUT SECTION FALLBACK DARK BOX COHERENCE --- */
+.fallback-dark-box {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  border-color: #262629 !important;
+}
+
+html.light .fallback-dark-box {
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  border-color: #262629 !important;
+}
+
+html.light .fallback-dark-box h1,
+html.light .fallback-dark-box h2,
+html.light .fallback-dark-box h3,
+html.light .fallback-dark-box h4,
+html.light .fallback-dark-box h5,
+html.light .fallback-dark-box h6,
+html.light .fallback-dark-box p,
+html.light .fallback-dark-box span,
+html.light .fallback-dark-box div,
+html.light .fallback-dark-box .text-white,
+html.light .fallback-dark-box [class*="text-white"],
+html.light .fallback-dark-box [class*="text-slate-100"],
+html.light .fallback-dark-box [class*="text-slate-200"],
+html.light .fallback-dark-box [class*="text-slate-300"] {
+  color: #FFFFFF !important;
+}
+
+html.light .fallback-dark-box .text-emerald-400 {
+  color: #34D399 !important; /* bright light green */
+}
+
+html.light .fallback-dark-box .text-\[\#FF6A00\] {
+  color: #FF6A00 !important;
+}
+
+
 

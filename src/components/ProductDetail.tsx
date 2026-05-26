@@ -105,7 +105,7 @@ export default function ProductDetail({
         className="flex items-center gap-2 px-4 py-2.5 bg-[#1B1B1D] text-gray-300 hover:text-white rounded-md border border-[#262629] mb-8 font-display font-bold text-xs uppercase tracking-wider transition-performance group"
       >
         <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-        Back To Catalogue / Shop
+        Kataloğa / Mağazaya Dön
       </button>
 
       {/* Main product showcase row */}
@@ -115,7 +115,7 @@ export default function ProductDetail({
         <div className="lg:col-span-6 flex flex-col gap-6">
           <div className="bg-[#101012] border border-[#262629] rounded-xl flex items-center justify-center p-12 relative h-96 sm:h-[450px] overflow-hidden group">
             <span className="absolute top-4 left-4 bg-[#FF6A00]/10 border border-[#FF6A00]/30 text-[#FF6A00] text-[10px] font-mono font-black tracking-widest px-3 py-1.5 rounded uppercase">
-              STUDIO CAPTURE (SWEDISH STAGE)
+              DEPO STÜDYO GÖRÜNTÜSÜ
             </span>
             
             <img
@@ -149,21 +149,21 @@ export default function ProductDetail({
           </div>
 
           {/* Warranty card */}
-          <div className="bg-gradient-to-r from-[#FF6A00]/10 via-[#1B1B1D] to-[#1B1B1D] border border-[#FF6A00]/25 rounded-lg p-5 flex items-start gap-4">
-            <div className="p-3 bg-[#FF6A00] text-black rounded-md font-sans font-black flex flex-col items-center justify-center">
-              <span className="text-xl leading-none">
+          <div className="bg-orange-500/5 dark:bg-[#1B1B1D]/60 border border-orange-500/20 dark:border-[#FF6A00]/25 rounded-lg p-5 flex items-start gap-4">
+            <div className="p-3 bg-[#FF6A00] text-black rounded-md font-sans font-black flex flex-col items-center justify-center shrink-0">
+              <span className="text-xl leading-none font-extrabold text-black">
                 {product.specs.warranty.split(' ')[0]}
               </span>
-              <span className="text-[9px] font-mono leading-none tracking-wider mt-1 uppercase">
+              <span className="text-[9px] font-mono leading-none tracking-wider mt-1 uppercase text-black">
                 {product.specs.warranty.split(' ').slice(1).join(' ')}
               </span>
             </div>
             <div>
-              <h5 className="font-display font-bold text-sm text-white uppercase tracking-wide">
-                MILEAGE TRANSFORMATION GUARANTEE
-              </h5>
-              <p className="text-xs text-gray-400 mt-1">
-                Backed by {product.brand}&rsquo;s nationwide treadwear protection program. Enjoy premium flat tire roadside assist with tire balancing validations.
+              <div className="font-display font-bold text-sm text-slate-900 dark:text-white uppercase tracking-wide">
+                DİŞ AŞINMASI KM KORUMA GARANTİSİ
+              </div>
+              <p className="text-xs text-slate-600 dark:text-gray-400 mt-1 leading-relaxed">
+                {product.brand} markasının ulusal aşınma koruması programı kapsamında desteklenmektedir. Ücretsiz yol yardımı ve gelişmiş balans ayarı doğrulamasından yararlanın.
               </p>
             </div>
           </div>
@@ -176,20 +176,20 @@ export default function ProductDetail({
             <div className="flex items-center justify-between border-b border-[#262629]/80 pb-3 mb-4">
               <span className="text-xs font-mono font-bold text-[#FF6A00] tracking-widest uppercase flex items-center gap-1.5">
                 <Flame className="w-4 h-4" />
-                {product.type} / Racing-Ready Compound
+                {product.type === 'Summer' ? 'YAZ LASTİĞİ' : product.type === 'Winter' ? 'KIŞ LASTİĞİ' : product.type === 'All-Season' ? '4 MEVSİM' : product.type === 'All-Terrain' ? 'ARAZİ / AT' : 'PİST/YARIŞ'} / Yarışa Hazır Bileşen
               </span>
 
               <span className="flex items-center gap-1.5 text-xs text-emerald-400 font-mono">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping inline-block" />
-                In Stock &bull; Ships within 24 Hours
+                Stokta Var &bull; 24 Saat İçinde Kargoda
               </span>
             </div>
 
             {/* Brand Title and Model */}
             <span className="text-sm font-mono tracking-[4px] text-gray-400 block uppercase">
-              {product.brand} PERFORMANCE SERIES
+              {product.brand} PERFORMANS SERİSİ
             </span>
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight leading-none mt-2">
+            <h2 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight leading-none mt-2 uppercase">
               {product.brand} {product.model}
             </h2>
 
@@ -197,9 +197,9 @@ export default function ProductDetail({
             <div className="flex items-center gap-3 mt-4 text-xs font-mono text-gray-400">
               <span className="bg-[#262629] px-2.5 py-1 text-white rounded font-bold">{product.size}</span>
               <span>&bull;</span>
-              <span>Speed Index {product.speedRating}</span>
+              <span>Hız Endeksi {product.speedRating}</span>
               <span>&bull;</span>
-              <span>Load Rating {product.loadIndex}</span>
+              <span>Yük Sınırı {product.loadIndex}</span>
             </div>
 
             {/* Review ratings */}
@@ -213,21 +213,21 @@ export default function ProductDetail({
                 ))}
               </div>
               <span className="text-sm font-bold text-white font-mono">{product.rating}</span>
-              <span className="text-xs text-gray-400 font-mono">({product.reviewCount} customer reviews)</span>
+              <span className="text-xs text-gray-400 font-mono">({product.reviewCount} müşteri yorumu)</span>
             </div>
 
             {/* Price section */}
             <div className="mt-6 p-4 bg-[#0F0F10] border border-[#262629] rounded-lg">
               <div className="flex items-baseline justify-between">
                 <div>
-                  <span className="text-[10px] text-gray-500 block uppercase font-mono tracking-widest">Base Cost per Tire</span>
+                  <span className="text-[10px] text-gray-500 block uppercase font-mono tracking-widest">Lastik Başına Fiyat</span>
                   <span className="text-3xl font-mono font-extrabold text-white">
                     ${unitPrice.toFixed(2)}
                   </span>
                 </div>
                 <div className="text-right">
                   <span className="text-[10px] text-[#FF6A00] block uppercase font-mono tracking-wide font-extrabold animate-pulse">
-                    ⚡ Recalculated Total ({quantity} tires)
+                    ⚡ Hesaplanan Toplam ({quantity} adet)
                   </span>
                   <span className="text-3xl font-mono font-extrabold text-[#FF6A00]">
                     ${grandTotal.toFixed(2)}
@@ -238,8 +238,8 @@ export default function ProductDetail({
               {/* Dynamic discount notice */}
               {quantity >= 4 && (
                 <div className="mt-2.5 p-2 bg-emerald-500/10 border border-emerald-500/20 rounded flex items-center gap-2">
-                  <span className="text-[10px] bg-emerald-500 text-black px-1.5 py-0.5 font-bold uppercase rounded font-mono">COUPON VALID</span>
-                  <span className="text-[11px] text-emerald-400 font-mono">Set of 4+ qualifies for FREE local mobile garage installation delivery!</span>
+                  <span className="text-[10px] bg-emerald-500 text-black px-1.5 py-0.5 font-bold uppercase rounded font-mono">KUPON GEÇERLİ</span>
+                  <span className="text-[11px] text-emerald-400 font-mono">4'lü ve üzeri set alımlarında profesyonel kapıda mobil montaj hizmeti!</span>
                 </div>
               )}
             </div>
@@ -248,21 +248,21 @@ export default function ProductDetail({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
               {/* Sizing dropdown */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-mono tracking-widest text-gray-400 uppercase font-extrabold">Select Alternate Size</label>
+                <label className="text-[10px] font-mono tracking-widest text-gray-400 uppercase font-extrabold">Farklı Ebat Seçin</label>
                 <select
                   value={selectedSize}
                   onChange={(e) => setSelectedSize(e.target.value)}
                   className="w-full bg-[#101012] text-xs text-white px-4 py-3 border border-[#262629] focus:outline-none focus:border-[#FF6A00] font-mono rounded"
                 >
                   {alternateSizes.map((sz) => (
-                    <option key={sz} value={sz}>{sz} (Alternative fit)</option>
+                    <option key={sz} value={sz}>{sz} (Alternatif uyum)</option>
                   ))}
                 </select>
               </div>
 
               {/* Quantity Changer */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-mono tracking-widest text-gray-400 uppercase font-extrabold">Tire Quantity</label>
+                <label className="text-[10px] font-mono tracking-widest text-gray-400 uppercase font-extrabold">Lastik Sayısı</label>
                 <div className="flex bg-[#101012] border border-[#262629] rounded overflow-hidden">
                   <button
                     onClick={() => handleQtyChange(quantity - 1)}
@@ -291,13 +291,13 @@ export default function ProductDetail({
                 </div>
                 <div>
                   <h6 className="text-xs font-display font-black text-white uppercase tracking-wide flex items-center gap-1.5">
-                    PROFESSIONAL VALVE & BALANCE INSTALLATION
+                    PROFESYONEL SUBAP VE BALANS MONTAJI
                   </h6>
                   <p className="text-[11px] text-gray-400 mt-0.5 leading-normal">
-                    Includes certified tire balancing, new zinc valve stem kits, tire scrap disposal fee, &amp; choice of local shop OR mobile tire truck.
+                    Sertifikalı lastik balans ayarı, yeni çinko supap kitleri, eski lastik bertaraf bedeli ve kapıda mobil montaj veya anlaşmalı garaj seçeneğini içerir.
                   </p>
                   <span className="text-[10px] font-mono text-gray-500 block mt-1">
-                    Just ${installationFeePerTire} / tire (${installationTotal.toFixed(2)} total) &bull; Cancel anytime
+                    Sadece adet başı ${installationFeePerTire} (Toplamda ${installationTotal.toFixed(2)}) &bull; İstediğiniz zaman iptal edin
                   </span>
                 </div>
               </div>
@@ -310,7 +310,7 @@ export default function ProductDetail({
                     : 'bg-transparent border border-gray-600 text-gray-400 hover:text-white hover:border-gray-400'
                 }`}
               >
-                {includeInstallation ? 'Included' : 'Add Info'}
+                {includeInstallation ? 'Dahil' : 'Ekle'}
               </button>
             </div>
           </div>
@@ -321,7 +321,7 @@ export default function ProductDetail({
               onClick={() => onAddToCart(product, quantity, selectedSize, includeInstallation)}
               className="flex-1 py-4 bg-[#FF6A00] text-black font-display font-black tracking-widest text-xs uppercase rounded hover:bg-[#FF8533] transition-all glow-orange hover:scale-[1.01] flex items-center justify-center gap-2"
             >
-              ADD TO SHOPPING CART (${grandTotal.toFixed(2)})
+              SEPETE EKLE (${grandTotal.toFixed(2)})
             </button>
             
             <button
@@ -332,7 +332,7 @@ export default function ProductDetail({
                   : 'border-[#262629] hover:border-gray-500 text-gray-300 hover:text-white'
               }`}
             >
-              {activeCompareIds.includes(product.id) ? '✓ Comparing Standard' : 'Add to Compare'}
+              {activeCompareIds.includes(product.id) ? '✓ Karşılaştırılıyor' : 'Karşılaştır'}
             </button>
           </div>
         </div>
@@ -341,14 +341,14 @@ export default function ProductDetail({
       {/* Specifications Dashboard & Performance gauges section */}
       <section className="mb-12">
         <h3 className="font-display font-bold text-lg text-white mb-6 uppercase tracking-wider border-l-4 border-[#FF6A00] pl-3">
-          Tire Spec Sheets &amp; Performance Indexes
+          Lastik Özellikleri &amp; Performans Endeksleri
         </h3>
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Right index ratings */}
           <div className="md:col-span-5 bg-[#1B1B1D]/40 border border-[#262629]/60 rounded-xl p-6">
             <h4 className="text-xs font-mono font-bold tracking-widest text-gray-400 uppercase mb-6">
-              📊 TECHNICAL PROFILE METRICS
+              📊 TEKNİK PROFİL METRİKLERİ
             </h4>
             
             <div className="space-y-4">
@@ -356,9 +356,9 @@ export default function ProductDetail({
               <div>
                 <div className="flex justify-between text-xs font-mono mb-1">
                   <span className="flex items-center gap-1.5 text-gray-300">
-                    <Droplet className="w-4 h-4 text-cyan-400" /> Wet Braking Grip Resistance
+                    <Droplet className="w-4 h-4 text-cyan-400" /> Islak Zeminde Yol Tutuş ve Frenleme
                   </span>
-                  <span className="text-[#FF6A00] font-bold">Grade {product.specs.wetGrip}</span>
+                  <span className="text-[#FF6A00] font-bold">Derece {product.specs.wetGrip}</span>
                 </div>
                 <div className="h-2 bg-[#0F0F10] rounded overflow-hidden">
                   <div 
@@ -372,9 +372,9 @@ export default function ProductDetail({
               <div>
                 <div className="flex justify-between text-xs font-mono mb-1">
                   <span className="flex items-center gap-1.5 text-gray-300">
-                    <Gauge className="w-4 h-4 text-yellow-500" /> Rolling Fuel Efficiency
+                    <Gauge className="w-4 h-4 text-yellow-500" /> Yakıt Verimliliği / Yuvarlanma Direnci
                   </span>
-                  <span className="text-amber-400 font-bold">Grade {product.specs.fuelEfficiency}</span>
+                  <span className="text-amber-400 font-bold">Derece {product.specs.fuelEfficiency}</span>
                 </div>
                 <div className="h-2 bg-[#0F0F10] rounded overflow-hidden">
                   <div 
@@ -388,9 +388,9 @@ export default function ProductDetail({
               <div>
                 <div className="flex justify-between text-xs font-mono mb-1">
                   <span className="flex items-center gap-1.5 text-gray-300">
-                    <Volume2 className="w-4 h-4 text-emerald-400" /> Exterior Ride Noise Comfort
+                    <Volume2 className="w-4 h-4 text-emerald-400" /> Dış Sürüş Gürültüsü / Konfor
                   </span>
-                  <span className="text-white font-bold">{product.specs.noiseLevel} dB (Excellent noise isolation)</span>
+                  <span className="text-white font-bold">{product.specs.noiseLevel} dB (Mükemmel yalıtım)</span>
                 </div>
                 <div className="h-2 bg-[#0F0F10] rounded overflow-hidden">
                   <div 
@@ -404,7 +404,7 @@ export default function ProductDetail({
               <div>
                 <div className="flex justify-between text-xs font-mono mb-1">
                   <span className="flex items-center gap-1.5 text-gray-300">
-                    <Flame className="w-4 h-4 text-orange-500" /> Dry Asphalt Adhesion index
+                    <Flame className="w-4 h-4 text-orange-500" /> Kuru Asfalt Aşınma Tutunma Endeksi
                   </span>
                   <span className="text-white font-bold">UTQG {product.specs.treadwear}</span>
                 </div>
@@ -420,7 +420,7 @@ export default function ProductDetail({
             <div className="bg-[#0F0F10] p-3 rounded border border-[#262629] flex items-center gap-2 mt-6">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span className="text-[10px] text-gray-400 font-mono">
-                Validated and certified by Department of Transportation (DOT) testing standards.
+                Ulaştırma Bakanlığı (DOT) resmi test standartları tarafından doğrulanmış ve onaylanmıştır.
               </span>
             </div>
           </div>
@@ -428,20 +428,20 @@ export default function ProductDetail({
           {/* Grid Spec */}
           <div className="md:col-span-7 bg-[#1B1B1D]/40 border border-[#262629]/60 rounded-xl p-6">
             <h4 className="text-xs font-mono font-bold tracking-widest text-gray-400 uppercase mb-4">
-              📐 ENERGETIC MOUNTING & COMPOUNDS CONFIG
+              📐 DETAYLI MONTAJ VE COUPOUND YAPILANDIRMASI
             </h4>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {[
-                { title: 'Traction Grade', val: product.specs.traction },
-                { title: 'Temp rating', val: product.specs.temperature },
-                { title: 'Tread depth', val: product.specs.treadDepth },
-                { title: 'UTQG Treadwear', val: product.specs.treadwear },
-                { title: 'Runflat index', val: product.specs.runflat ? 'YES (reinforced)' : 'No (Standard casing)' },
-                { title: 'Speed rating', val: `${product.speedRating} (up to 186 MPH)` },
-                { title: 'Load Limit', val: `${product.loadIndex} (${(parseInt(product.loadIndex) * 18).toFixed(0)} lbs)` },
-                { title: 'Profile aspect', val: `${product.ratio}%` },
-                { title: 'Treadwear Warranty', val: product.specs.warranty },
+                { title: 'Çekiş Gücü Sınıfı', val: product.specs.traction },
+                { title: 'Sıcaklık Sınıfı', val: product.specs.temperature },
+                { title: 'Diş Derinliği', val: product.specs.treadDepth },
+                { title: 'UTQG Aşınma Puanı', val: product.specs.treadwear },
+                { title: 'Runflat Özelliği', val: product.specs.runflat ? 'EVET (Güçlendirilmiş karkas)' : 'Hayır (Standart karkas)' },
+                { title: 'Hız Endeksi', val: `${product.speedRating} (300 km/s hıza kadar)` },
+                { title: 'Yük Endeksi Sınırı', val: `${product.loadIndex} (${(parseInt(product.loadIndex) * 18).toFixed(0)} lbs)` },
+                { title: 'Yanak Kesit Oranı', val: `%${product.ratio}` },
+                { title: 'Diş Ömrü Garantisi', val: product.specs.warranty },
               ].map((spec, i) => (
                 <div key={i} className="bg-[#101012] p-3 rounded border border-[#262629]/60">
                   <span className="text-[10px] text-gray-500 uppercase font-mono block mb-1">{spec.title}</span>
@@ -451,7 +451,7 @@ export default function ProductDetail({
             </div>
 
             <p className="text-xs text-gray-400 mt-6 leading-relaxed">
-              <strong>Professional Safety Notice:</strong> Always coordinate rim tire offsets and vehicle payloads with standard DOT guidelines. When upgrading tires beyond default factory specs, consult a qualified mechanic to preserve vehicle stability system calculations.
+              <strong>Profesyonel Güvenlik Uyarısı:</strong> Jant lastik ofsetlerini ve araç yük kapasitelerini her zaman resmi standartlarla uyumlu hale getirin. Lastik ölçülerini varsayılan fabrika özelliklerinin ötesine taşırken, araç stabilite sistemi hesaplamalarını korumak için kalifiye bir teknisyene danışın.
             </p>
           </div>
         </div>
@@ -462,13 +462,13 @@ export default function ProductDetail({
         {/* Review list (Left 7 cols) */}
         <div className="lg:col-span-7">
           <h3 className="font-display font-bold text-lg text-white mb-6 uppercase tracking-wider">
-            Verified Customer Reviews ({product.reviews.length})
+            Doğrulanmış Müşteri Yorumları ({product.reviews.length})
           </h3>
 
           <div className="space-y-6">
             {product.reviews.length === 0 ? (
               <div className="bg-[#1B1B1D]/20 border border-dashed border-[#262629] rounded p-12 text-center text-gray-500 font-mono text-sm">
-                No verified purchase reviews yet. Be the first to install and review!
+                Henüz doğrulanmış kullanıcı yorumu bulunmamaktadır. İlk kuran ve yorumlayan siz olun!
               </div>
             ) : (
               product.reviews.map((rev) => (
@@ -483,7 +483,7 @@ export default function ProductDetail({
                       </span>
                       {rev.verified && (
                         <span className="flex items-center gap-1 text-[10px] font-mono bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded">
-                          <CheckCircle2 className="w-2.5 h-2.5" /> VERIFIED FIT
+                          <CheckCircle2 className="w-2.5 h-2.5" /> DOĞRULANMIŞ UYUM
                         </span>
                       )}
                     </div>
@@ -512,11 +512,11 @@ export default function ProductDetail({
                   <div className="mt-4 flex items-center justify-between border-t border-[#262629]/30 pt-3">
                     <button className="flex items-center gap-1.5 text-[10px] font-mono text-gray-400 hover:text-white transition-colors">
                       <ThumbsUp className="w-3.5 h-3.5 text-gray-500 hover:text-[#FF6A00]" />
-                      Was this helpful? ({rev.helpfulCount})
+                      Bu yorum yardımcı oldu mu? ({rev.helpfulCount})
                     </button>
                     
-                    <span className="text-[9px] text-gray-500 font-mono uppercase">
-                      Report abuse
+                    <span className="text-[9px] text-gray-500 font-mono uppercase cursor-pointer hover:underline">
+                      Kötüye kullanım bildir
                     </span>
                   </div>
                 </div>
@@ -528,27 +528,27 @@ export default function ProductDetail({
         {/* Submit Review Form (Right 5 cols) */}
         <div className="lg:col-span-5 bg-[#1B1B1D]/50 border border-[#262629] p-6 rounded-xl h-fit">
           <h4 className="font-display font-black text-sm text-white uppercase tracking-wide mb-1 flex items-center gap-2">
-            Submit Your Product Review
+            Ürün Hakkında Yorum Yazın
           </h4>
           <p className="text-xs text-gray-400 mb-6 font-mono">
-            How does the {product.brand} compound feel on your setup?
+            {product.brand} bileşeninin aracınızdaki yol tutuş ve sürüş hissi nasıl?
           </p>
 
           {submittedReviewSuccess ? (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/30 rounded text-center text-emerald-400 font-mono text-xs animate-pulse">
-              ✓ REVIEW SUCCESSFULLY INJECTED!
+            <div className="p-6 bg-emerald-500/10 border border-emerald-500/30 rounded text-center text-emerald-400 font-mono text-xs animate-pulse font-bold">
+              ✓ YORUMUNUZ BAŞARIYLA GÖNDERİLDİ!
               <br />
-              Thank you! Our automated moderator has approved your verified spec review instantly.
+              Teşekkür ederiz! Sistemimiz yaptığınız değerlendirmeyi onaylayarak anında yayına almıştır.
             </div>
           ) : (
             <form onSubmit={handleReviewSubmit} className="space-y-4">
               {/* Review Name */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-extrabold">Your Driver Name</label>
+                <label className="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-extrabold">Sürücü Adınız</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Lewis H."
+                  placeholder="Örn: Melih D."
                   value={reviewName}
                   onChange={(e) => setReviewName(e.target.value)}
                   className="w-full bg-[#101012] text-xs text-white px-4 py-3 border border-[#262629] focus:outline-none focus:border-[#FF6A00] rounded font-mono"
@@ -557,7 +557,7 @@ export default function ProductDetail({
 
               {/* Rating Star Picker */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-extrabold">Compound Rating</label>
+                <label className="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-extrabold">Bileşen Değerlendirmesi</label>
                 <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map((stars) => (
                     <button
@@ -578,24 +578,24 @@ export default function ProductDetail({
 
               {/* Review Title */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-extrabold">Review Headline</label>
+                <label className="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-extrabold">Yorum Başlığı</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Phenomal dry grip limits"
+                  placeholder="Örn: Olağanüstü kuru zemin yol tutuşu"
                   value={reviewTitle}
                   onChange={(e) => setReviewTitle(e.target.value)}
-                  className="w-full bg-[#101012] text-xs text-white px-4 py-3 border border-[#262629] focus:outline-none focus:border-[#FF6A00] rounded font-display font-medium"
+                  className="w-full bg-[#101012] text-xs text-white px-4 py-3 border border-[#262629] focus:outline-none focus:border-[#FF6A00] rounded"
                 />
               </div>
 
               {/* Review comment */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-extrabold">Detailed Experience</label>
+                <label className="text-[10px] font-mono uppercase tracking-widest text-gray-400 font-extrabold">Detaylı Deneyiminiz</label>
                 <textarea
                   required
                   rows={4}
-                  placeholder="Tell other drivers about tread noise, cornering stiffness, wet channel braking feedback..."
+                  placeholder="Diğer sürücülere yol ve diş gürültüsü, viraj kararlılığı, ıslak zemin kanal frenleme tepkileri hakkında bilgi verin..."
                   value={reviewComment}
                   onChange={(e) => setReviewComment(e.target.value)}
                   className="w-full bg-[#101012] text-xs text-white px-4 py-3 border border-[#262629] focus:outline-none focus:border-[#FF6A00] rounded font-sans leading-relaxed"
@@ -606,7 +606,7 @@ export default function ProductDetail({
                 type="submit"
                 className="w-full py-3.5 bg-white hover:bg-[#FF6A00] text-black hover:text-black font-display font-extrabold text-xs uppercase tracking-wider rounded transition-all flex items-center justify-center gap-2"
               >
-                <Send className="w-3.5 h-3.5" /> Submit Verified Review
+                <Send className="w-3.5 h-3.5" /> Yorumu Gönder
               </button>
             </form>
           )}
@@ -616,7 +616,7 @@ export default function ProductDetail({
       {/* Recommended related products slider */}
       <section className="mb-8 border-t border-[#262629] pt-12">
         <h3 className="font-display font-black text-xl text-white uppercase tracking-tight mb-8">
-          Related Matches &bull; High-performance alternatives
+          Benzer Lastikler &amp; Performans Alternatifleri
         </h3>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -639,7 +639,7 @@ export default function ProductDetail({
                 <span className="font-display font-extrabold text-xs text-white block mt-0.5 line-clamp-1">{rel.brand} {rel.model}</span>
                 <div className="flex items-center justify-between mt-3 font-mono text-[11px]">
                   <span className="text-gray-400">{rel.size}</span>
-                  <span className="text-[#FF6A00] font-extrabold">${rel.price.toFixed(0)}/ea</span>
+                  <span className="text-[#FF6A00] font-extrabold">${rel.price.toFixed(0)}/adet</span>
                 </div>
               </div>
             </div>

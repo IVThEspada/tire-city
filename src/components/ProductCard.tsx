@@ -37,7 +37,7 @@ export default function ProductCard({
       
       {/* Top action bar overlay */}
       <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
-        <span className="bg-black text-white text-[9px] font-mono tracking-wider font-extrabold px-3 py-1.5 rounded-sm uppercase shadow-sm">
+        <span className="bg-black text-slate-100 text-[9px] font-mono tracking-wider font-extrabold px-3 py-1.5 rounded-sm uppercase shadow-sm">
           {getBadgeText(product.type, product.isPopular)}
         </span>
         
@@ -88,7 +88,7 @@ export default function ProductCard({
         
         {/* Hover zoom overlay indicator */}
         <div className="absolute inset-0 bg-[#0F0F10]/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="bg-black/90 text-[10px] font-mono tracking-wider text-white px-4 py-2 rounded-full uppercase flex items-center gap-1">
+          <div className="bg-black/90 text-[10px] font-mono tracking-wider text-slate-100 px-4 py-2 rounded-full uppercase flex items-center gap-1">
             <span>ÖZELLİKLERİ İNCELE</span>
             <ArrowUpRight className="w-3 h-3 text-[#FF6A00]" />
           </div>

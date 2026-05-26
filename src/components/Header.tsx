@@ -37,8 +37,7 @@ export default function Header({
     { id: 'home', label: 'ANA SAYFA' },
     { id: 'shop', label: 'LASTİK AL' },
     { id: 'brands', label: 'MARKALAR' },
-    { id: 'contact', label: 'YARDIM' },
-    { id: 'admin', label: 'ADMİN PANELİ' },
+    { id: 'contact', label: 'İLETİŞİM' },
   ];
 
   return (

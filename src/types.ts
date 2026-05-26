@@ -70,6 +70,7 @@ export interface BrandLogo {
   logoUrl?: string;
   textLogo: string;
   subText: string;
+  description?: string;
 }
 
 export interface BookingDetails {
@@ -79,3 +80,43 @@ export interface BookingDetails {
   location: string;
   vehicleInfo: string;
 }
+
+export interface CustomSlide {
+  id: string;
+  tagText: string;
+  title: string;
+  titleGradient: string;
+  description: string;
+  primaryBtnText: string;
+  primaryActionType: 'find_tires' | 'browse_catalog' | 'filter_all_terrain';
+  secondaryBtnText: string;
+  secondaryActionType: 'find_tires' | 'browse_catalog' | 'filter_all_terrain';
+  image: string;
+  imageClass?: string;
+  badgeLabel: string;
+  badgeValue: string;
+  bgGlowColor: string;
+  stats: { label: string; value: string; highlight?: boolean }[];
+}
+
+export interface FeaturedCatalog {
+  id: string;
+  title: string;
+  subtitle: string;
+  productIds: string[];
+}
+
+export interface SafetyRatingConfig {
+  badgeText: string;
+  title: string;
+  desc1: string;
+  desc2: string;
+  bgUrl: string;
+  badge1Label: string;
+  badge1Sub: string;
+  badge2Label: string;
+  badge2Sub: string;
+}
+
+
+

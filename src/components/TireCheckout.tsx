@@ -20,12 +20,12 @@ export default function TireCheckout({
   // Shipping Form State
   const [address, setAddress] = useState({
     fullName: 'Melih Demir',
-    phone: '+90 (532) 993-8822',
-    street: 'Performance Caddesi, No: 45, Beşiktaş',
+    phone: '0532 993 88 22',
+    street: 'Caddebostan Mah. No:15 D:4, Kadıköy',
     city: 'İstanbul',
-    zipCode: '34340',
+    zipCode: '34728',
     date: '2026-05-24',
-    timeSlot: '12:00 PM - 03:00 PM',
+    timeSlot: '12:00 - 15:00',
   });
 
   // Credit Card Form State
@@ -103,9 +103,9 @@ export default function TireCheckout({
   };
 
   const timeSlots = [
-    '09:00 AM - 12:00 PM',
-    '12:00 PM - 03:00 PM',
-    '03:00 PM - 06:00 PM',
+    '09:00 - 12:00',
+    '12:00 - 15:00',
+    '15:00 - 18:00',
   ];
 
   return (
@@ -117,16 +117,16 @@ export default function TireCheckout({
             <Loader2 className="w-12 h-12 text-[#FF6A00] animate-spin mx-auto" />
             <div className="space-y-2">
               <h3 className="font-display font-black text-white text-lg tracking-tight uppercase">
-                CALIBRATING ORDER
+                SİPARİŞ YAPILANDIRILIYOR
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed font-mono">
-                Transmitting end-to-end payment credentials. Registering mobile mechanic telemetry schedule with dispatchers. Please hold on.
+                Uçtan uca güvenli ödeme bilgileri iletiliyor. Mobil servis ve rot balans randevusu teknik koordinasyon merkezine kaydediliyor. Lütfen bekleyin.
               </p>
             </div>
             
             <div className="border-t border-[#262629] pt-4 font-mono text-[9px] text-[#FF6A00] flex justify-between uppercase">
-              <span>Gate: SSL SECURE</span>
-              <span>TLS 1.3 Active</span>
+              <span>GÜVENLİK: SSL SECURE</span>
+              <span>TLS 1.3 Aktif</span>
             </div>
           </div>
         </div>
@@ -144,46 +144,46 @@ export default function TireCheckout({
           </div>
 
           <span className="text-[10px] bg-emerald-500/10 text-emerald-400 font-mono font-black px-2.5 py-1 rounded w-fit uppercase mx-auto block mb-3">
-            VERIFIED ORDER COMPLETED
+            SİPARİŞ GEÇİŞİ ONAYLANDI
           </span>
 
           <h2 className="font-display font-black text-2xl sm:text-3xl text-white dark:text-white light:text-slate-900 tracking-tight uppercase leading-none">
-            Invoice Confirmed
+            Sipariş Faturası Onaylandı
           </h2>
 
           <div className="my-6 p-4 bg-[#101012] dark:bg-[#101012] light:bg-slate-50 border border-[#262629]/60 dark:border-[#262629]/50 light:border-slate-150 rounded-lg space-y-3 font-mono text-xs text-left">
             <div className="flex justify-between border-b border-[#262629]/60 pb-2">
-              <span className="text-gray-500">Invoice Registry</span>
+              <span className="text-gray-500">Sipariş / Fiş Numarası</span>
               <span className="text-white dark:text-white light:text-slate-800 font-bold">{receiptNumber}</span>
             </div>
             <div className="flex justify-between border-b border-[#262629]/60 pb-2">
-              <span className="text-gray-500">Service Level</span>
+              <span className="text-gray-500">Hizmet Türü</span>
               <span className="text-[#FF6A00] font-bold">
-                {shippingMethod === 'mobile' ? 'Mobile Home Fitment' : 'Authorized Store Pick'}
+                {shippingMethod === 'mobile' ? 'Adreste Mobil Montaj Hizmeti' : 'Anlaşmalı Servis Noktasından Teslim Al'}
               </span>
             </div>
 
             {shippingMethod === 'mobile' && (
               <>
                 <div className="flex justify-between border-b border-[#262629]/60 pb-2">
-                  <span className="text-gray-500">Scheduled Day</span>
+                  <span className="text-gray-500">Randevu Tarihi</span>
                   <span className="text-white dark:text-white light:text-slate-800">{address.date}</span>
                 </div>
                 <div className="flex justify-between border-b border-[#262629]/60 pb-2">
-                  <span className="text-gray-500">Window Slot</span>
+                  <span className="text-gray-500">Randevu Saat Aralığı</span>
                   <span className="text-white dark:text-white light:text-slate-800">{address.timeSlot}</span>
                 </div>
               </>
             )}
 
             <div className="flex justify-between pt-2">
-              <span className="text-gray-500 uppercase">Registered Address</span>
+              <span className="text-gray-500 uppercase">Kayıtlı Adres</span>
               <span className="text-gray-300 dark:text-gray-300 light:text-slate-700 font-sans text-[11px] text-right truncate max-w-[200px]">{address.street}, {address.city}</span>
             </div>
           </div>
 
           <p className="text-xs text-gray-400 bg-orange-50 dark:bg-orange-950/20 p-3 rounded-lg leading-relaxed text-left max-w-sm mx-auto mb-8 font-sans">
-            🚚 <strong className="text-orange-500 dark:text-[#FF6A00]">Mobile Dispatch Reminder:</strong> A certified alignment technician will call you 30 minutes before arrival to align and balancer compound wheels.
+            🚚 <strong className="text-orange-500 dark:text-[#FF6A00]">Mobil Koordinasyon Bildirimi:</strong> Sertifikalı balans ve montaj aracımız randevu saatinizden 30 dakika önce sizi telefonla arayarak montaj işlemleri için hazırlık aşamasını başlatacaktır.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
@@ -191,13 +191,13 @@ export default function TireCheckout({
               onClick={() => onNavigateTab('profile')}
               className="flex-1 py-3 bg-[#FF6A00] hover:bg-[#FF8533] text-black font-display font-black text-xs uppercase tracking-widest rounded transition-colors"
             >
-              Monitor Fleet Setup
+              Hizmet Takibi &amp; Profilim
             </button>
             <button
               onClick={() => onNavigateTab('shop')}
               className="flex-1 py-3 bg-[#262629] text-white hover:bg-slate-800 border border-gray-700 hover:border-gray-500 text-xs font-display font-medium rounded transition-colors"
             >
-              Back to Catalog
+              Kataloğa Gözat
             </button>
           </div>
         </div>
@@ -210,7 +210,7 @@ export default function TireCheckout({
             {/* Delivery choice toggle */}
             <div className="bg-[#1B1B1D] dark:bg-[#1B1B1D] light:bg-[#FFFFFF] border border-[#262629] dark:border-[#262629] light:border-slate-200 rounded-xl p-5 shadow-sm text-left space-y-4">
               <h3 className="font-display font-black text-white dark:text-white light:text-slate-800 text-sm tracking-wide uppercase border-b border-[#262629]/50 dark:border-[#262629]/50 light:border-slate-100 pb-3">
-                1. SELECT SERVICE MOUNT METHOD
+                1. MONTAJ YÖNTEMİNİ SEÇİN
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -225,9 +225,9 @@ export default function TireCheckout({
                 >
                   <Truck className="w-5 h-5 flex-shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-xs font-black block uppercase font-display">HOME MOBILE MOUNTING</span>
+                    <span className="text-xs font-black block uppercase font-display">KAPIDA MOBİL MONTAJ</span>
                     <span className="text-[10.5px] text-gray-400 leading-normal block mt-1 font-sans">
-                      We bring hydraulic tire changers and road-force balancers straight to your home driveway or office location.
+                      Özel hidrolik lastik sökme-takma ve hassas lazer balans araçlarımızı direkt evinize veya ofisinize gönderelim.
                     </span>
                   </div>
                 </button>
@@ -243,9 +243,9 @@ export default function TireCheckout({
                 >
                   <Landmark className="w-5 h-5 flex-shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-xs font-black block uppercase font-display">STORE PICKUP &amp; ALIGNMENT</span>
+                    <span className="text-xs font-black block uppercase font-display">İSTASYONDA MONTAH HİZMETİ</span>
                     <span className="text-[10.5px] text-gray-400 leading-normal block mt-1 font-sans">
-                      Pick up tire compounds directly at our regional warehouse and utilize stationary digital diagnostic cages.
+                      Lastikleri en yakın bölge servis istasyonumuzdan teslim alın ve profesyonel mekanik ekipmanlarımızdan yararlanın.
                     </span>
                   </div>
                 </button>
@@ -255,12 +255,12 @@ export default function TireCheckout({
             {/* Address Form */}
             <div className="bg-[#1B1B1D] dark:bg-[#1B1B1D] light:bg-[#FFFFFF] border border-[#262629] dark:border-[#262629] light:border-slate-200 rounded-xl p-5 shadow-sm text-left space-y-4">
               <h3 className="font-display font-black text-white dark:text-white light:text-slate-800 text-sm tracking-wide uppercase border-b border-[#262629]/50 dark:border-[#262629]/50 light:border-slate-100 pb-3">
-                {shippingMethod === 'mobile' ? '2. MOBILE DISPATCH SCHEDULE & ADDRESS' : '2. REGISTER BILLING CONTROLS'}
+                {shippingMethod === 'mobile' ? '2. ADRESTE MONTAJ ADRESİ VE SAATİ' : '2. FATURA BİLGİLERİNİ GİRİN'}
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Full Legal Name</label>
+                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Adı Soyadı</label>
                   <input
                     type="text"
                     value={address.fullName}
@@ -271,7 +271,7 @@ export default function TireCheckout({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Phone Contact</label>
+                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">İrtibat Telefonu</label>
                   <input
                     type="text"
                     value={address.phone}
@@ -283,7 +283,7 @@ export default function TireCheckout({
 
                 <div className="sm:col-span-2 space-y-1">
                   <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">
-                    {shippingMethod === 'mobile' ? 'Driveway Installation Address' : 'Billing Address'}
+                    {shippingMethod === 'mobile' ? 'Mobil Montaj Adresi (Sokak / No)' : 'Fatura Adresi'}
                   </label>
                   <input
                     type="text"
@@ -295,7 +295,7 @@ export default function TireCheckout({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">City</label>
+                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Şehir / İlçe</label>
                   <input
                     type="text"
                     value={address.city}
@@ -306,7 +306,7 @@ export default function TireCheckout({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">ZIP / Postal Code</label>
+                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Posta Kodu</label>
                   <input
                     type="text"
                     value={address.zipCode}
@@ -321,7 +321,7 @@ export default function TireCheckout({
                     <div className="space-y-1">
                       <label className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider block flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5 text-[#FF6A00]" />
-                        Assembly Day
+                        Montaj Randevu Günü
                       </label>
                       <input
                         type="date"
@@ -334,7 +334,7 @@ export default function TireCheckout({
                     </div>
 
                     <div className="space-y-1">
-                      <label className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider block">Mobile Window Slot</label>
+                      <label className="text-[10px] font-mono font-bold text-gray-400 uppercase tracking-wider block">Saat Dilimi Rezervasyonu</label>
                       <select
                         value={address.timeSlot}
                         onChange={(e) => setAddress({ ...address, timeSlot: e.target.value })}
@@ -353,7 +353,7 @@ export default function TireCheckout({
             {/* Credit Card Details Form Frame */}
             <div className="bg-[#1B1B1D] dark:bg-[#1B1B1D] light:bg-[#FFFFFF] border border-[#262629] dark:border-[#262629] light:border-slate-200 rounded-xl p-5 shadow-sm text-left space-y-6">
               <h3 className="font-display font-black text-white dark:text-white light:text-slate-800 text-sm tracking-wide uppercase border-b border-[#262629]/50 dark:border-[#262629]/50 light:border-slate-100 pb-3">
-                3. CREDIT CARD PAYMENT VAULT
+                3. GÜVENLİ ÖDEME GEÇİDİ (SSL SECURE)
               </h3>
 
               {/* Dynamic visual credit card interface */}
@@ -362,8 +362,8 @@ export default function TireCheckout({
                 
                 <div className="flex justify-between items-start">
                   <div>
-                    <span className="text-[9px] uppercase tracking-wider font-extrabold text-black/60 block">ORIGINAL CARRIER CARD</span>
-                    <span className="text-[11px] font-bold text-white block mt-0.5">TIRE CITY PLATINUM</span>
+                    <span className="text-[9px] uppercase tracking-wider font-extrabold text-black/60 block">GÜVENLİ KART PROTOKOLÜ</span>
+                    <span className="text-[11px] font-bold text-white block mt-0.5">LASTİK ŞEHRİ PLATINUM</span>
                   </div>
                   <Landmark className="w-6 h-6 text-black/80" />
                 </div>
@@ -376,13 +376,13 @@ export default function TireCheckout({
 
                 <div className="flex justify-between items-end text-left text-black/70">
                   <div>
-                    <span className="text-[8px] uppercase block">Cardholder</span>
-                    <span className="text-xs font-bold text-black uppercase block max-w-[190px] truncate">{card.name || 'Your Full Name'}</span>
+                    <span className="text-[8px] uppercase block">Kart Sahibi</span>
+                    <span className="text-xs font-bold text-black uppercase block max-w-[190px] truncate">{card.name || 'AD SOYAD'}</span>
                   </div>
                   <div className="flex gap-4">
                     <div>
-                      <span className="text-[8px] uppercase block">Expires</span>
-                      <span className="text-xs font-bold text-black block">{card.expiry || 'MM/YY'}</span>
+                       <span className="text-[8px] uppercase block">SKT</span>
+                      <span className="text-xs font-bold text-black block">{card.expiry || 'AA/YY'}</span>
                     </div>
                     <div>
                       <span className="text-[8px] uppercase block">CVV</span>
@@ -395,7 +395,7 @@ export default function TireCheckout({
               {/* Input forms for the credit card */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2 space-y-1">
-                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Credit Card Number</label>
+                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Kredi Kartı Numarası</label>
                   <div className="relative">
                     <input
                       type="text"
@@ -410,10 +410,10 @@ export default function TireCheckout({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Expiry Date</label>
+                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Son Kullanma Tarihi (Ay/Yıl)</label>
                   <input
                     type="text"
-                    placeholder="MM/YY"
+                    placeholder="AA/YY"
                     value={card.expiry}
                     onChange={handleExpiryChange}
                     className="w-full bg-[#101012] dark:bg-[#101012] light:bg-slate-50 text-xs text-white dark:text-white light:text-slate-800 p-2.5 rounded border border-[#262629] dark:border-[#262629] light:border-slate-200 focus:outline-none focus:border-[#FF6A00] font-mono text-center"
@@ -422,7 +422,7 @@ export default function TireCheckout({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Security CVV Code</label>
+                  <label className="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider block">Güvenlik Kodu (CVV)</label>
                   <input
                     type="password"
                     placeholder="123"
@@ -442,7 +442,7 @@ export default function TireCheckout({
             
             <div className="bg-[#1B1B1D] dark:bg-[#1B1B1D] light:bg-[#FFFFFF] border border-[#262629] dark:border-[#262629] light:border-slate-200 rounded-xl p-5 shadow-sm text-left space-y-4">
               <h4 className="text-xs font-mono font-bold text-gray-400 dark:text-gray-400 light:text-slate-500 uppercase tracking-widest border-b border-[#262629]/50 dark:border-[#262629]/50 light:border-slate-100 pb-2">
-                Compound Items
+                Sepetteki Lastikler
               </h4>
 
               <div className="space-y-3.5 max-h-48 overflow-y-auto pr-1">
@@ -453,7 +453,7 @@ export default function TireCheckout({
                         {item.product.model}
                       </span>
                       <span className="text-[9.5px] text-gray-500 font-mono block">
-                        {item.qty} units &bull; {item.selectedSize}
+                        {item.qty} Adet &bull; {item.selectedSize}
                       </span>
                     </div>
                     <span className="text-xs font-mono font-bold text-white dark:text-white light:text-slate-700">
@@ -465,27 +465,27 @@ export default function TireCheckout({
 
               <div className="border-t border-[#262629]/50 dark:border-[#262629]/40 light:border-slate-100 pt-4 space-y-2.5 font-mono text-xs">
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Tires Sum</span>
+                  <span className="text-gray-500">Lastik Tutarı</span>
                   <span className="text-white dark:text-white light:text-slate-800 font-bold">${tiresSubtotal.toFixed(2)}</span>
                 </div>
                 
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Assembly Assembly Fee</span>
+                  <span className="text-gray-500">Mobil Montaj Bedeli</span>
                   <span className="text-white dark:text-white light:text-slate-800 font-bold">${installationSubtotal.toFixed(2)}</span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Dispose Eco taxes</span>
+                  <span className="text-gray-500">Geri Kazanım Katkı Payı (GEKAP)</span>
                   <span className="text-white dark:text-white light:text-slate-800 font-bold">${disposalFees.toFixed(2)}</span>
                 </div>
 
                 <div className="flex justify-between pb-3.5 border-b border-[#262629]/40 dark:border-[#262629]/40 light:border-slate-100">
-                  <span className="text-gray-500">Sales Taxes (8%)</span>
+                  <span className="text-gray-500">KDV Dahil (%8 Kasa Vergisi)</span>
                   <span className="text-white dark:text-white light:text-slate-800 font-bold">${stateTaxes.toFixed(2)}</span>
                 </div>
 
                 <div className="flex justify-between text-base items-baseline pt-1">
-                  <span className="text-white dark:text-white light:text-slate-900 font-bold font-sans">Grand Total</span>
+                  <span className="text-white dark:text-white light:text-slate-900 font-bold font-sans">Genel Toplam</span>
                   <span className="text-xl font-black text-[#FF6A00]">${finalTotalAmount.toFixed(2)}</span>
                 </div>
               </div>
@@ -496,12 +496,12 @@ export default function TireCheckout({
                 disabled={cartItems.length === 0}
                 className="w-full py-4 bg-[#FF6A00] text-black font-display font-black text-xs uppercase tracking-widest rounded hover:bg-[#FF8533] hover:scale-103 active:scale-97 transition-all glow-orange disabled:opacity-50 disabled:pointer-events-none"
               >
-                Assemble Fitting Order
+                SİPARİŞİ TAMAMLA VE KAYDET
               </button>
 
               <div className="flex items-center gap-2 text-[10px] text-gray-500 font-mono justify-center pt-2 border-t border-[#262629]/40 dark:border-[#262629]/40 light:border-slate-100">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>Authorized Card Vault Guard</span>
+                <span>PCI-DSS SSL Güvenli Koruma Protokolü</span>
               </div>
             </div>
 

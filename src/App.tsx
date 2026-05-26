@@ -1,24 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { TireProduct, CartItem, TireType } from './types';
-import { PRODUCTS, IMAGE_HERO_TIRES, IMAGE_TREAD_BG } from './data';
+import { TireProduct, CartItem, TireType, BrandLogo, CustomSlide, FeaturedCatalog, SafetyRatingConfig } from './types';
+import { PRODUCTS, BRANDS, IMAGE_HERO_TIRES, IMAGE_TREAD_BG } from './data';
 
 // Component imports
 import Header from './components/Header';
-import TireFinder from './components/TireFinder';
-import BrandStrip from './components/BrandStrip';
-import ProductCard from './components/ProductCard';
 import ProductDetail from './components/ProductDetail';
 import CartDrawer from './components/CartDrawer';
 import TireCompare from './components/TireCompare';
-import PromoCampaigns from './components/PromoCampaigns';
-import HeroSlider from './components/HeroSlider';
+import HeroSlider, { DEFAULT_SLIDES } from './components/HeroSlider';
+import TireFinder from './components/TireFinder';
+import BrandStrip from './components/BrandStrip';
+import ProductCard from './components/ProductCard';
+import ShopSidebar from './components/ShopSidebar';
+import AdminCustomizeView from './components/AdminCustomizeView';
 
-// Newly added visual checkout, profile and sidebar pages
+// Page Views
+import HomeView from './components/HomeView';
+import ShopView from './components/ShopView';
+import BrandsView from './components/BrandsView';
+import AboutView from './components/AboutView';
+import ContactView from './components/ContactView';
 import UserProfile from './components/UserProfile';
 import DedicatedCart from './components/DedicatedCart';
 import TireCheckout from './components/TireCheckout';
-import ShopSidebar from './components/ShopSidebar';
-import AdminPanel from './components/AdminPanel';
 
 // Direct Lucide icons imports for descriptive grids
 import { 
@@ -41,6 +45,33 @@ import {
   Sun,
   Moon
 } from 'lucide-react';
+
+export const DEFAULT_CATALOGS: FeaturedCatalog[] = [
+  {
+    id: 'cat-pist',
+    title: '🏎️ HIZ VE PİST TUTKUNLARI ÖZEL SEÇİMİ',
+    subtitle: 'Maksimum kuru yol tutuşu ve yüksek viraj kontrolü sunan ultra yüksek performanslı lastikler',
+    productIds: ['prod-mich-pilot', 'prod-yoko-advan']
+  },
+  {
+    id: 'cat-kis',
+    title: '❄️ ZORLU HAVA KOŞULLARI ŞAMPİYONLARI',
+    subtitle: 'Kar, yağmur ve dondurucu soğuklarda üst düzey yol tutuş ve fren güvenliği sağlayan seriler',
+    productIds: ['prod-pirelli-zero', 'prod-conti-sport']
+  }
+];
+
+export const DEFAULT_SAFETY_CONFIG: SafetyRatingConfig = {
+  badgeText: '⚡ YÜKSEK HIZ VE GÜVENLİK DERECELENDİRMESİ',
+  title: 'TIRE CITY HAKKINDA • KURULUŞ 2012',
+  desc1: "Tire City'de misyonumuz sadece e-ticaretin ötesine geçer. Performansı doğrulanmış kauçuk bileşen şablonlarıyla güvenli otomotiv güvenlik konfigürasyonları oluşturuyoruz. Gelişmiş İsveç stüdyo renderlarını gerçek zamanlı DOT hizalama hesaplayıcıları ile birleştirerek, yüksek beygir gücündeki sedanınızın veya arazi Jeep'inizin sertifikalı ofsetlerde sürüş yapmasını sağlıyoruz.",
+  desc2: 'Son teknoloji mobil montaj filomuz, dijital lazer dengeleyicileri doğrudan çalışma alanınıza getirerek sizi değerli pist saatlerinden tasarruf ettirir. Premium lastik dağıtımının nasıl bir his olduğunu deneyimleyin.',
+  bgUrl: '',
+  badge1Label: '12 AYLIK',
+  badge1Sub: 'Yol Hasarı Koruması',
+  badge2Label: 'SERTİFİKALI',
+  badge2Sub: 'Usta Garaj Teknisyenleri'
+};
 
 export default function App() {
   // Theme state: defaults to 'dark' or retrieves from local history if present
@@ -66,7 +97,93 @@ export default function App() {
 
   // Routing & detailed components states
   const [activeTab, setActiveTab] = useState('home');
-  const [allProducts, setAllProducts] = useState<TireProduct[]>(PRODUCTS);
+  const [allProducts, setAllProducts] = useState<TireProduct[]>(() => {
+    const saved = localStorage.getItem('tire-city-products');
+    return saved ? JSON.parse(saved) : PRODUCTS;
+  });
+
+  const [brands, setBrands] = useState<BrandLogo[]>(() => {
+    const saved = localStorage.getItem('tire-city-brands');
+    return saved ? JSON.parse(saved) : BRANDS;
+  });
+
+  const [slides, setSlides] = useState<CustomSlide[]>(() => {
+    const saved = localStorage.getItem('tire-city-slides');
+    return saved ? JSON.parse(saved) : DEFAULT_SLIDES;
+  });
+
+  const [catalogs, setCatalogs] = useState<FeaturedCatalog[]>(() => {
+    const saved = localStorage.getItem('tire-city-catalogs');
+    return saved ? JSON.parse(saved) : DEFAULT_CATALOGS;
+  });
+
+  const [aboutText, setAboutText] = useState<string>(() => {
+    return localStorage.getItem('tire-city-aboutText') || 
+      `On yılı aşkın bir süre önce, sıradan ve rehberliği olmayan lastik dağıtım ağlarına tepki olarak kurulan Tire City, ülke çapında tamamlanan 10.000'den fazla memnun montaj ile sektöründe fark yaratmıştır.\n\nProfesyonel CAD boyutlandırma planlarını, onaylı mekanik doğrulama indekslerini ve yüksek düzeyde kalibre edilmiş DOT veri tabanı kontrollerini birleştirerek, her sürücünün güvenli ve optimize edilmiş performans limitlerinin keyfini çıkarmasını sağlıyoruz.`;
+  });
+
+  const [contactPhone, setContactPhone] = useState<string>(() => {
+    return localStorage.getItem('tire-city-contactPhone') || '+1 (800) 555-TIRE';
+  });
+
+  const [contactEmail, setContactEmail] = useState<string>(() => {
+    return localStorage.getItem('tire-city-contactEmail') || 'support@tirecityperformance.com';
+  });
+
+  const [contactAddress, setContactAddress] = useState<string>(() => {
+    return localStorage.getItem('tire-city-contactAddress') || '100 Track Way, Speedway CA 90412';
+  });
+
+  const [workingHours, setWorkingHours] = useState<string>(() => {
+    return localStorage.getItem('tire-city-workingHours') || 'Hafta İçi: 07:00 — 20:00\nHafta Sonu: 08:00 — 17:00 (Pist Desteği Öncelikli)';
+  });
+
+  const [safetyConfig, setSafetyConfig] = useState<SafetyRatingConfig>(() => {
+    const saved = localStorage.getItem('tire-city-safety-config');
+    return saved ? JSON.parse(saved) : DEFAULT_SAFETY_CONFIG;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-products', JSON.stringify(allProducts));
+  }, [allProducts]);
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-brands', JSON.stringify(brands));
+  }, [brands]);
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-slides', JSON.stringify(slides));
+  }, [slides]);
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-catalogs', JSON.stringify(catalogs));
+  }, [catalogs]);
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-aboutText', aboutText);
+  }, [aboutText]);
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-contactPhone', contactPhone);
+  }, [contactPhone]);
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-contactEmail', contactEmail);
+  }, [contactEmail]);
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-contactAddress', contactAddress);
+  }, [contactAddress]);
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-workingHours', workingHours);
+  }, [workingHours]);
+
+  useEffect(() => {
+    localStorage.setItem('tire-city-safety-config', JSON.stringify(safetyConfig));
+    setAboutText(safetyConfig.desc1);
+  }, [safetyConfig]);
+
   const [activeProduct, setActiveProduct] = useState<TireProduct | null>(null);
 
   // Cart list
@@ -162,7 +279,7 @@ export default function App() {
       }
       if (prev.length >= 3) {
         // limit comparison to max 3 tires
-        alert('You can compare a maximum of 3 performance tires side-by-side.');
+        alert('En fazla 3 adet performans lastiğini yan yana karşılaştırabilirsiniz.');
         return prev;
       }
       return [...prev, product];
@@ -254,23 +371,6 @@ export default function App() {
     return 0; // default is recommended orders
   });
 
-  if (activeTab === 'admin') {
-    return (
-      <AdminPanel
-        products={allProducts}
-        onUpdateProducts={(newProducts) => {
-          setAllProducts(newProducts);
-        }}
-        onNavigateTab={(tab) => {
-          setActiveTab(tab);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-        theme={theme}
-        onThemeToggle={handleThemeToggle}
-      />
-    );
-  }
-
   return (
     <div className="min-h-screen bg-[#0F0F10] dark:bg-[#0F0F10] light:bg-[#F5F7FA] text-[#EAEAEA] dark:text-[#EAEAEA] light:text-[#334155] flex flex-col antialiased transition-colors">
       
@@ -317,6 +417,40 @@ export default function App() {
           <>
             {/* TAB: Home Layout */}
             {activeTab === 'home' && (
+              <HomeView
+                onFindTiresClick={scrollToFinder}
+                onBrowseCatalogClick={() => {
+                  setActiveTab('shop');
+                  setSearchFilter({});
+                }}
+                onFilterTypeClick={(type) => {
+                  setSearchFilter({ type: type as any });
+                  // Scroll automatically to catalogue list to view results
+                  setTimeout(() => {
+                    const element = document.getElementById('featured-grid-anchor');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
+                }}
+                searchFilter={searchFilter}
+                setSearchFilter={setSearchFilter}
+                filteredProducts={filteredProducts}
+                setActiveProduct={setActiveProduct}
+                onAddToCart={(p, q, sz, withIns) => handleAddToCart(p, q, sz, withIns)}
+                onToggleCompare={handleToggleCompare}
+                compareProducts={compareProducts}
+                wishlist={wishlist}
+                onToggleWishlist={handleToggleWishlist}
+                finderRef={finderRef}
+                brandsList={brands}
+                slidesList={slides}
+                catalogsList={catalogs}
+                safetyConfig={safetyConfig}
+              />
+            )}
+
+            {activeTab === 'home-disabled' && (
               <div>
                 
                 {/* 1. HERO SLIDESHOW MODULE */}
@@ -355,15 +489,12 @@ export default function App() {
                 </section>
 
                 {/* 3. BRAND STRIP WITH DYNAMIC HOVERS */}
-                <section className="bg-gradient-to-r from-[#101012] via-[#1B1B1D] to-[#101012] py-8 border-y border-[#262629]/50 shadow-md">
-                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                  <div className="p-8 bg-[#1B1B1D]/40 rounded-xl border border-[#262629] shadow-md animate-fadeIn">
                     <BrandStrip
                       onBrandSelect={(brand) => {
-                        setSearchFilter((prev) => ({ ...prev, brand: prev.brand === brand ? undefined : brand }));
-                        const element = document.getElementById('featured-grid-anchor');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
+                        setSearchFilter({ brand });
+                        setActiveTab('shop');
                       }}
                       selectedBrand={searchFilter.brand}
                     />
@@ -377,10 +508,10 @@ export default function App() {
                   <div className="flex flex-col md:flex-row items-start md:items-end justify-between border-b border-[#262629] pb-6 mb-8 gap-4">
                     <div>
                       <h3 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight uppercase">
-                        {searchFilter.compatibleProductIds ? '⚡ VEHICLE SPECIFIC RECOMMENDATIONS' : '🏁 Featured tire catalog'}
+                        {searchFilter.compatibleProductIds ? '⚡ ARACINIZA ÖZEL TAVSİYELER' : '🏁 Öne Çıkan Lastik Kataloğu'}
                       </h3>
                       <p className="text-xs text-gray-400 font-mono mt-1 uppercase tracking-wider">
-                        SHOWING {filteredProducts.length} PREMIUM PERFORMANCE OPTIONS
+                        {filteredProducts.length} PREMİUM PERFORMANS SEÇENEĞİ GÖSTERİLİYOR
                       </p>
                     </div>
 
@@ -390,7 +521,7 @@ export default function App() {
                         onClick={() => setSearchFilter({})}
                         className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] font-mono font-bold uppercase hover:bg-red-500 hover:text-white transition-colors"
                       >
-                        Clear Active Filters &bull; Show All
+                        Aktif Filtreleri Temizle &bull; Hepsini Göster
                       </button>
                     )}
                   </div>
@@ -401,8 +532,8 @@ export default function App() {
                       <div className="flex items-center gap-3">
                         <CheckCircle2 className="w-5 h-5 text-emerald-400 stroke-[2.5]" />
                         <span className="text-xs text-white leading-relaxed font-mono">
-                          <strong className="text-emerald-400 uppercase">FITMENT GUARANTEED:</strong> Fits{' '}
-                          <span className="underline font-bold text-white">{searchFilter.vehicleLabel}</span>. Our alignment calculations verify these tire listings match your setup perfectly.
+                          <strong className="text-emerald-400 uppercase">UYUM GARANTİLİ:</strong>{' '}
+                          <span className="underline font-bold text-white">{searchFilter.vehicleLabel}</span> ile uyumlu. Aks hizalama hesaplamalarımız bu lastiklerin aracınızla mükemmel eşleştiğini doğrulamaktadır.
                         </span>
                       </div>
                       
@@ -410,7 +541,7 @@ export default function App() {
                         onClick={() => setSearchFilter({})}
                         className="text-white hover:text-[#FF6A00] text-xs font-mono font-bold underline whitespace-nowrap"
                       >
-                        Change Selection
+                        Seçimi Değiştir
                       </button>
                     </div>
                   )}
@@ -419,9 +550,9 @@ export default function App() {
                   {filteredProducts.length === 0 ? (
                     <div className="py-24 text-center border border-dashed border-[#262629] rounded-xl bg-[#1B1B1D]/20">
                       <AlertCircle className="w-12 h-12 text-gray-500 mx-auto mb-3" />
-                      <h4 className="font-display font-bold text-base text-white">No Matching Tires Found</h4>
+                      <h4 className="font-display font-bold text-base text-white">Eşleşen Lastik Bulunamadı</h4>
                       <p className="text-xs text-gray-400 font-mono max-w-sm mx-auto mt-2 leading-relaxed">
-                        We currently don&rsquo;t stock compounds under this width ratio constraint. Try clicking &ldquo;Clear Active Filters&rdquo; above to browse universal models.
+                        Bu genişlik ve oran kriterlerinde stokta ürünümüz bulunmamaktadır. Tüm evrensel modelleri listelemek için yukarıdaki &ldquo;Filtreleri Temizle&rdquo; butonuna tıklayabilirsiniz.
                       </p>
                     </div>
                   ) : (
@@ -460,30 +591,30 @@ export default function App() {
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                        {/* Left side info */}
-                       <div className="lg:col-span-6 bg-black/80 backdrop-blur-md p-8 md:p-12 rounded-xl border border-[#262629] max-w-xl">
-                         <h4 className="text-xs font-mono font-bold tracking-widest text-[#FF6A00] uppercase mb-2">
-                           ⚡ HIGH ALTITUDE SPEED &amp; SAFETY RATING
-                         </h4>
-                         <h2 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight leading-none mb-6">
-                           ABOUT TIRE CITY &bull; EST. 2012
-                         </h2>
+                       <div className="lg:col-span-6 bg-black/80 fallback-dark-box backdrop-blur-md p-8 md:p-12 rounded-xl border border-[#262629] max-w-xl">
+                         <div className="text-xs font-mono font-bold tracking-widest text-[#FF6A00] uppercase mb-2">
+                           ⚡ YÜKSEK HIZ VE GÜVENLİK DERECELENDİRMESİ
+                         </div>
+                         <div className="font-display font-black text-3xl sm:text-4xl text-slate-100 tracking-tight leading-none mb-6">
+                           TIRE CITY HAKKINDA &bull; KURULUŞ 2012
+                         </div>
                          
-                         <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-6 font-sans">
-                           At Tire City, our mission transcends mere e-commerce. We build secure automotive safety configurations with performance-validated rubber compound layouts. By pairing advanced Swedish studio renderings with real-time DOT alignment calculators, we ensure your high-horsepower sedan or off-road Jeep rides on certified offsets.
+                         <p className="text-slate-200 text-xs sm:text-sm leading-relaxed mb-6 font-sans">
+                           Tire City'de misyonumuz sadece e-ticaretin ötesine geçer. Performansı doğrulanmış kauçuk bileşen şablonlarıyla güvenli otomotiv güvenlik konfigürasyonları oluşturuyoruz. Gelişmiş İsveç stüdyo renderlarını gerçek zamanlı DOT hizalama hesaplayıcıları ile birleştirerek, yüksek beygir gücündeki sedanınızın veya arazi Jeep'inizin sertifikalı ofsetlerde sürüş yapmasını sağlıyoruz.
                          </p>
 
-                         <p className="text-gray-400 text-xs leading-relaxed mb-8">
-                           Our state-of-the-art mobile installation fleet carries digital laser balancers directly to your workspace, saving you valuable track hours. Experience what premium tyre distribution feels like.
+                         <p className="text-slate-300 text-xs leading-relaxed mb-8">
+                           Son teknoloji mobil montaj filomuz, dijital lazer dengeleyicileri doğrudan çalışma alanınıza getirerek sizi değerli pist saatlerinden tasarruf ettirir. Premium lastik dağıtımının nasıl bir his olduğunu deneyimleyin.
                          </p>
 
                          <div className="grid grid-cols-2 gap-6 font-mono border-t border-[#262629] pt-6">
                            <div>
-                             <span className="text-emerald-400 block font-bold">12-MONTH</span>
-                             <span className="text-[10px] text-gray-500 uppercase tracking-wider block">Road Hazard Protection</span>
+                             <span className="text-emerald-400 block font-bold">12 AYLIK</span>
+                             <span className="text-[10px] text-white font-extrabold uppercase tracking-wider block">Yol Hasarı Koruması</span>
                            </div>
                            <div>
-                             <span className="text-white block font-bold">CERTIFIED</span>
-                             <span className="text-[10px] text-gray-500 uppercase tracking-wider block">Master Garage Mechanics</span>
+                             <span className="text-white block font-bold font-black">SERTİFİKALI</span>
+                             <span className="text-[10px] text-white font-extrabold uppercase tracking-wider block">Usta Garaj Teknisyenleri</span>
                            </div>
                          </div>
                        </div>
@@ -496,14 +627,33 @@ export default function App() {
 
             {/* TAB: Shop Catalog Layout Directly */}
             {activeTab === 'shop' && (
+              <ShopView
+                searchFilter={searchFilter}
+                setSearchFilter={setSearchFilter}
+                allProducts={allProducts}
+                filteredProducts={filteredProducts}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+                setActiveProduct={setActiveProduct}
+                onAddToCart={handleAddToCart}
+                onToggleCompare={handleToggleCompare}
+                compareProducts={compareProducts}
+                wishlist={wishlist}
+                onToggleWishlist={handleToggleWishlist}
+              />
+            )}
+
+            {activeTab === 'shop-disabled' && (
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fadeIn">
                 <div className="flex flex-col md:flex-row items-baseline justify-between gap-4 border-b border-[#262629] pb-6 mb-8">
                   <div>
                     <h2 className="font-display font-black text-3xl text-white dark:text-white light:text-slate-900 tracking-tight uppercase">
-                      Tire City Storehouse
+                      Tire City Deposu
                     </h2>
                     <p className="text-xs font-mono text-gray-400">
-                      Explore track-focused summer tires, compound winter grip systems, and heavy offroad AT casing profiles.
+                      Piste odaklı yaz lastiklerini, kışlık yol tutuş sistemlerini ve ağır hizmet arazi AT lastik profillerini keşfedin.
                     </p>
                   </div>
                 </div>
@@ -586,9 +736,19 @@ export default function App() {
 
             {/* TAB: Brands Detail View directly */}
             {activeTab === 'brands' && (
+              <BrandsView
+                onBrandSelect={(bName) => {
+                  setSearchFilter({ brand: bName });
+                  setActiveTab('shop');
+                }}
+                brandsList={brands}
+              />
+            )}
+
+            {activeTab === 'brands-disabled' && (
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fadeIn">
                 <h2 className="font-display font-black text-3xl text-white tracking-tight uppercase border-b border-[#262629] pb-6 mb-8">
-                  AUTHORIZED MANUFACTURER BLUEPRINTS
+                  YETKİLİ ÜRETİCİ TASARIMLARI
                 </h2>
                 
                 <div className="p-8 bg-[#1B1B1D]/40 rounded-xl border border-[#262629] mb-12">
@@ -598,26 +758,27 @@ export default function App() {
                       setActiveTab('shop');
                     }}
                     selectedBrand={undefined}
+                    brandsList={brands}
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
                   <div className="p-5 bg-[#1B1B1D]/20 border border-[#262629] rounded-lg">
-                    <span className="text-emerald-400 font-bold block mb-1">MICHELIN TECHNOLOGY</span>
+                    <span className="text-emerald-400 font-bold block mb-1">MICHELIN TEKNOLOJİSİ</span>
                     <p className="text-gray-400 leading-normal">
-                      Pioneers of multi-rubber compounds and dynamic bio-mechanic siping matrices designed to support heavy track payloads.
+                      Ağır pist yüklerini desteklemek için tasarlanmış çoklu kauçuk bileşenlerin ve dinamik biyomekanik filtrelerin öncüleri.
                     </p>
                   </div>
                   <div className="p-5 bg-[#1B1B1D]/20 border border-[#262629] rounded-lg">
-                    <span className="text-orange-400 font-bold block mb-1">CONTINENTAL CASINGS</span>
+                    <span className="text-orange-400 font-bold block mb-1">CONTINENTAL KARKASLARI</span>
                     <p className="text-gray-400 leading-normal">
-                      German precision design standards. Specializes in Road-Force compliance and interior noise cancelation layers.
+                      Alman hassas tasarım standartları. Yol Gücü uyumluluğu ve iç gürültü engelleme katmanlarında uzmanlaşmıştır.
                     </p>
                   </div>
                   <div className="p-5 bg-[#1B1B1D]/20 border border-[#262629] rounded-lg">
-                    <span className="text-red-400 font-bold block mb-1">PIRELLI MOTORS</span>
+                    <span className="text-red-400 font-bold block mb-1">PIRELLI MOTOR SPORLARI</span>
                     <p className="text-gray-400 leading-normal">
-                      Formula 1 official original equipment supplier. Formulated for ultra-high speed ratings and severe curve G-Loads.
+                      Formula 1 resmi orijinal ekipman tedarikçisi. Ultra yüksek hız dereceleri ve zorlu viraj G Kuvvetleri için formüle edilmiştir.
                     </p>
                   </div>
                 </div>
@@ -626,17 +787,21 @@ export default function App() {
 
             {/* TAB: About Detail Page */}
             {activeTab === 'about' && (
+              <AboutView customAboutText={aboutText} />
+            )}
+
+            {activeTab === 'about-disabled' && (
               <div className="max-w-4xl mx-auto px-4 py-16 animate-fadeIn font-mono text-xs text-gray-400 space-y-8">
                 <h2 className="font-display font-black text-3xl text-white tracking-tight uppercase border-b border-[#262629] pb-6 mb-8 font-sans">
-                  TIRE CITY ORIGINAL SPECS
+                  TIRE CITY ORİJİNAL ÖZELLİKLERİ
                 </h2>
 
                 <div className="space-y-4 font-sans text-sm text-gray-300 leading-relaxed">
                   <p>
-                    Established over a decade ago in response to generic, unguided tire distribution networks, Tire City has grown into a master class platform with over 10,000 satisfied fittings completed nationwide.
+                    On yılı aşkın bir süre önce, sıradan ve rehberliği olmayan lastik dağıtım ağlarına tepki olarak kurulan Tire City, ülke çapında tamamlanan 10.000'den fazla memnun montaj ile sektöründe fark yaratmıştır.
                   </p>
                   <p>
-                    By merging professional CAD sizing blueprints, certified mechanical validation indices, and highly calibrated DOT database checks, we ensure every driver enjoys safe, optimized performance limits.
+                    Profesyonel CAD boyutlandırma planlarını, onaylı mekanik doğrulama indekslerini ve yüksek düzeyde kalibre edilmiş DOT veri tabanı kontrollerini birleştirerek, her sürücünün güvenli ve optimize edilmiş performans limitlerinin keyfini çıkarmasını sağlıyoruz.
                   </p>
                 </div>
 
@@ -644,16 +809,16 @@ export default function App() {
                   <div className="bg-[#1B1B1D]/40 border border-[#262629] p-5 rounded-lg flex gap-3">
                     <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                     <div>
-                      <span className="text-white font-bold block mb-1 uppercase text-xs">Laser Road force Balancing</span>
-                      <span className="text-[11px] block">Every local garage selection features laser balancing to counter micro vibrations.</span>
+                      <span className="text-white font-bold block mb-1 uppercase text-xs">Lazer Yol Kuvveti Balansı</span>
+                      <span className="text-[11px] block">Her yerel garaj seçiminde mikro titreşimleri önlemek için lazer balans ayarı bulunur.</span>
                     </div>
                   </div>
                   
                   <div className="bg-[#1B1B1D]/40 border border-[#262629] p-5 rounded-lg flex gap-3">
                     <Truck className="w-5 h-5 text-[#FF6A00] flex-shrink-0" />
                     <div>
-                      <span className="text-white font-bold block mb-1 uppercase text-xs">Driveway Mobile Mounting</span>
-                      <span className="text-[11px] block">Don&rsquo;t waste weekend track hours in simple waiting lobbies. Our dynamic hydraulic vans arrive straight to your garage door.</span>
+                      <span className="text-white font-bold block mb-1 uppercase text-xs">Kapıda Mobil Montaj</span>
+                      <span className="text-[11px] block">Hafta sonu pist saatlerinizi bekleme salonlarında harcamayın. Dinamik hidrolik vanlarımız doğrudan garaj kapınıza gelsin.</span>
                     </div>
                   </div>
                 </div>
@@ -662,23 +827,58 @@ export default function App() {
 
             {/* TAB: Contact Support Page */}
             {activeTab === 'contact' && (
+              <ContactView
+                phone={contactPhone}
+                email={contactEmail}
+                address={contactAddress}
+                workingHours={workingHours}
+              />
+            )}
+
+            {/* TAB: Admin Customize Page */}
+            {activeTab === 'admin' && (
+              <AdminCustomizeView
+                products={allProducts}
+                setProducts={setAllProducts}
+                brands={brands}
+                setBrands={setBrands}
+                aboutText={aboutText}
+                setAboutText={setAboutText}
+                contactPhone={contactPhone}
+                setContactPhone={setContactPhone}
+                contactEmail={contactEmail}
+                setContactEmail={setContactEmail}
+                contactAddress={contactAddress}
+                setContactAddress={setContactAddress}
+                workingHours={workingHours}
+                setWorkingHours={setWorkingHours}
+                slides={slides}
+                setSlides={setSlides}
+                catalogs={catalogs}
+                setCatalogs={setCatalogs}
+                safetyConfig={safetyConfig}
+                setSafetyConfig={setSafetyConfig}
+              />
+            )}
+
+            {activeTab === 'contact-disabled' && (
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fadeIn">
                 <h2 className="font-display font-black text-3xl text-white tracking-tight uppercase border-b border-[#262629] pb-6 mb-8">
-                  DRIVER SUPPORT &amp; DISPATCH CHANNELS
+                  SÜRÜCÜ DESTEK VE SEVK KANALLARI
                 </h2>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                   {/* Info */}
                   <div className="lg:col-span-5 space-y-6">
                     <p className="text-gray-400 text-xs font-mono leading-relaxed">
-                      Questions regarding rim load caps, specialized winter speed indexes, or fleet booking calendars? Connect with our master technicians directly:
+                      Jant yük sınırları, özel kış hız indeksleri veya filo rezervasyon takvimleri ile ilgili sorularınız mı var? Doğrudan usta teknisyenlerimizle iletişime geçin:
                     </p>
 
                     <div className="space-y-4 font-mono text-xs">
                       <div className="p-4 bg-[#1B1B1D]/40 border border-[#262629] rounded flex items-center gap-3">
                         <Phone className="w-5 h-5 text-[#FF6A00]" />
                         <div>
-                          <span className="text-gray-500 block">SUPPORT DESK</span>
+                          <span className="text-gray-500 block">DESTEK HATTI</span>
                           <span className="text-white font-bold text-sm">+1 (800) 555-TIRE</span>
                         </div>
                       </div>
@@ -686,7 +886,7 @@ export default function App() {
                       <div className="p-4 bg-[#1B1B1D]/40 border border-[#262629] rounded flex items-center gap-3">
                         <Mail className="w-5 h-5 text-[#FF6A00]" />
                         <div>
-                          <span className="text-gray-500 block">TECH DISPATCH EMAIL</span>
+                          <span className="text-gray-500 block">TEKNİK DESTEK E-POSTASI</span>
                           <span className="text-white font-bold text-sm">support@tirecityperformance.com</span>
                         </div>
                       </div>
@@ -694,49 +894,49 @@ export default function App() {
                       <div className="p-4 bg-[#1B1B1D]/40 border border-[#262629] rounded flex items-center gap-3">
                         <MapPin className="w-5 h-5 text-[#FF6A00]" />
                         <div>
-                          <span className="text-gray-500 block">HEADQUARTERS</span>
+                          <span className="text-gray-500 block">GENEL MERKEZ</span>
                           <span className="text-white font-bold">100 Track Way, Speedway CA 90412</span>
                         </div>
                       </div>
                     </div>
 
                     <div className="p-4 bg-[#FF6A00]/10 border border-[#FF6A00]/20 rounded text-xs font-mono text-gray-300">
-                      <strong>GARAGE OPEN HOURS (HOURS EST):</strong>
-                      <br />Mon - Fri: 07:00 AM &mdash; 08:00 PM
-                      <br />Sat - Sun: 08:00 AM &mdash; 05:00 PM (Track Support Priority)
+                      <strong>GARAJ ÇALIŞMA SAATLERİ (EST):</strong>
+                      <br />Hafta İçi: 07:00 &mdash; 20:00
+                      <br />Hafta Sonu: 08:00 &mdash; 17:00 (Pist Desteği Öncelikli)
                     </div>
                   </div>
 
                   {/* Submission form */}
                   <div className="lg:col-span-7 bg-[#1B1B1D]/40 border border-[#262629] rounded-xl p-6 sm:p-8">
                      <h4 className="font-display font-black text-sm text-white uppercase tracking-wider mb-6">
-                       DISPATCH TICKET REQUEST
+                       DESTEK TALEBİ GÖNDER
                      </h4>
 
-                     <form onSubmit={(e) => { e.preventDefault(); alert('Tech dispatch ticket created successfully! We will text you shortly.'); }} className="space-y-4 font-mono text-xs">
+                     <form onSubmit={(e) => { e.preventDefault(); alert('Teknik destek talebi başarıyla oluşturuldu! Sizinle en kısa sürede iletişime geçeceğiz.'); }} className="space-y-4 font-mono text-xs">
                        <div className="grid grid-cols-2 gap-4">
                          <div className="flex flex-col gap-1.5">
-                           <span className="text-zinc-500">Full Name</span>
+                           <span className="text-zinc-500">Ad Soyad</span>
                            <input type="text" required className="w-full bg-[#101012] border border-[#262629] rounded px-3 py-2.5 text-white" />
                          </div>
                          <div className="flex flex-col gap-1.5">
-                           <span className="text-zinc-500">Contact Email</span>
+                           <span className="text-zinc-500">E-posta Adresi</span>
                            <input type="email" required className="w-full bg-[#101012] border border-[#262629] rounded px-3 py-2.5 text-white" />
                          </div>
                        </div>
                        
                        <div className="flex flex-col gap-1.5">
-                         <span className="text-zinc-500">Active Vehicle Model</span>
-                         <input type="text" placeholder="e.g. BMW M4 Coupe" className="w-full bg-[#101012] border border-[#262629] rounded px-3 py-2.5 text-white" />
+                         <span className="text-zinc-500">Mevcut Araç Modeli</span>
+                         <input type="text" placeholder="Örn: BMW M4 Coupe" className="w-full bg-[#101012] border border-[#262629] rounded px-3 py-2.5 text-white" />
                        </div>
 
                        <div className="flex flex-col gap-1.5">
-                         <span className="text-zinc-500">Message details</span>
-                         <textarea rows={4} required placeholder="State your sizing concerns, offset queries, or specific performance goals here..." className="w-full bg-[#101012] border border-[#262629] rounded px-3 py-2.5 text-white"></textarea>
+                         <span className="text-zinc-500">Mesaj Detayları</span>
+                         <textarea rows={4} required placeholder="Boyutlandırma endişelerinizi, ofset sorgularınızı veya özel performans hedeflerinizi buraya yazın..." className="w-full bg-[#101012] border border-[#262629] rounded px-3 py-2.5 text-white"></textarea>
                        </div>
 
                        <button type="submit" className="w-full py-3.5 bg-[#FF6A00] text-black font-display font-black tracking-wider uppercase rounded hover:bg-[#FF8533] transition-colors">
-                         Submit Ticket Request
+                         Destek Talebi Gönder
                        </button>
                      </form>
                   </div>
@@ -812,40 +1012,40 @@ export default function App() {
             </div>
             
             <p className="text-[11px] text-gray-400 font-normal font-sans leading-relaxed mt-1">
-              authorized distributor of premier high-performance tires and track compounds. Pair custom sizes with certified mobile garage fitting trucks directly to your doors. Complete safety validation guaranteed.
+              Birinci sınıf yüksek performanslı lastiklerin ve pist bileşenlerinin yetkili distribütörü. Özel boyutları, doğrudan kapınıza gelen sertifikalı mobil garaj montaj araçlarıyla birleştirin. Tam güvenlik onayı garantilidir.
             </p>
           </div>
 
           {/* Col 2 */}
           <div className="md:col-span-2 space-y-3">
-            <span className="text-[11px] font-bold text-white uppercase tracking-wider font-display">QUICK ACCESS</span>
+            <span className="text-[11px] font-bold text-white uppercase tracking-wider font-display">HIZLI ERİŞİM</span>
             <ul className="space-y-1.5">
-              <li><button onClick={() => { setActiveTab('shop'); setActiveProduct(null); }} className="hover:text-white transition-colors">Browse Catalog</button></li>
-              <li><button onClick={() => { setActiveTab('brands'); setActiveProduct(null); }} className="hover:text-white transition-colors">Brands Blueprint</button></li>
-              <li><button onClick={() => { setActiveTab('about'); setActiveProduct(null); }} className="hover:text-white transition-colors">About Story</button></li>
-              <li><button onClick={scrollToFinder} className="hover:text-white transition-colors">Interactive Finder</button></li>
+              <li><button onClick={() => { setActiveTab('shop'); setActiveProduct(null); }} className="hover:text-white hover:underline transition-colors cursor-pointer text-left">Kataloğa Göz At</button></li>
+              <li><button onClick={() => { setActiveTab('brands'); setActiveProduct(null); }} className="hover:text-white hover:underline transition-colors cursor-pointer text-left">Markalar</button></li>
+              <li><button onClick={() => { setActiveTab('about'); setActiveProduct(null); }} className="hover:text-white hover:underline transition-colors cursor-pointer text-left">Hakkımızda</button></li>
+              <li><button onClick={scrollToFinder} className="hover:text-white hover:underline transition-colors cursor-pointer text-left">İnteraktif Arama</button></li>
             </ul>
           </div>
 
           {/* Col 3 */}
           <div className="md:col-span-2 space-y-3">
-            <span className="text-[11px] font-bold text-white uppercase tracking-wider font-display">DRIVER TERMS</span>
+            <span className="text-[11px] font-bold text-white uppercase tracking-wider font-display">SÜRÜCÜ KOŞULLARI</span>
             <ul className="space-y-1.5">
-              <li><a href="#" className="hover:text-white transition-colors">Road Hazard Terms</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Mobile install Scope</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Affirm 0% Financing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">DOT Warranty Claims</a></li>
+              <li><a href="#" className="hover:text-white hover:underline transition-colors cursor-pointer">Yol Hasarı Koşulları</a></li>
+              <li><a href="#" className="hover:text-white hover:underline transition-colors cursor-pointer">Mobil Montaj Kapsamı</a></li>
+              <li><a href="#" className="hover:text-white hover:underline transition-colors cursor-pointer">Finansman Seçenekleri</a></li>
+              <li><a href="#" className="hover:text-white hover:underline transition-colors cursor-pointer">Garanti Talepleri</a></li>
             </ul>
           </div>
 
           {/* Col 4 (Newsletter subscribe) */}
           <div className="md:col-span-4 space-y-3">
-            <span className="text-[11px] font-bold text-white uppercase tracking-wider font-display block">JOIN THE STAGE NEWSLETTER</span>
+            <span className="text-[11px] font-bold text-white uppercase tracking-wider font-display block">E-BÜLTENİMİZE KATILIN</span>
             <p className="text-[11px] text-gray-400 font-sans">
-              Subscribe to obtain immediate notification vectors for Continental rebates, Goodyear coupon drops, and track day specs.
+              Continental indirimleri, Goodyear kuponları ve pist günü güncellemeleri hakkında anında bildirim almak için e-bültene kaydolun.
             </p>
 
-            <form onSubmit={(e) => { e.preventDefault(); alert('Subscribed to performance newsletters!'); }} className="flex gap-1.5 mt-2">
+            <form onSubmit={(e) => { e.preventDefault(); alert('Bültene başarıyla abone olundu!'); }} className="flex gap-1.5 mt-2">
               <input
                 type="email"
                 required
@@ -856,7 +1056,7 @@ export default function App() {
                 type="submit"
                 className="bg-[#FF6A00] hover:bg-[#FF8533] text-black font-display font-black text-[10px] tracking-wider uppercase px-4 rounded transition-colors"
               >
-                Join
+                Katıl
               </button>
             </form>
           </div>
@@ -865,13 +1065,13 @@ export default function App() {
 
         {/* Brand credit statement */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-gray-500 font-mono">
-          <span>&copy; {new Date().getFullYear()} TIRE CITY INC. TRACK ROAD SENSORS AND LOGS REMAIN SECURE. ALL RIGHTS RESERVED.</span>
+          <span>&copy; {new Date().getFullYear()} TIRE CITY INC. SENSÖR VE PİST SİSTEMLERİ GÜVENDE. TÜM HAKLARI SAKLIDIR.</span>
           <div className="flex gap-4">
-            <a href="#" className="hover:underline hover:text-white">PRIVACY</a>
+            <a href="#" className="hover:underline hover:text-white cursor-pointer">GİZLİLİK</a>
             <span>&bull;</span>
-            <a href="#" className="hover:underline hover:text-white">DOT STANDARDS</a>
+            <a href="#" className="hover:underline hover:text-white cursor-pointer">DOT STANDARTLARI</a>
             <span>&bull;</span>
-            <a href="#" className="hover:underline hover:text-white">CREDITS</a>
+            <a href="#" className="hover:underline hover:text-white cursor-pointer">KAYNAKLAR</a>
           </div>
         </div>
       </footer>

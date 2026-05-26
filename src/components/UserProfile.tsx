@@ -150,14 +150,14 @@ export default function UserProfile({
     { title: 'Sipariş Alındı', desc: 'Ödemeniz doğrulandı', icon: CreditCard },
     { title: 'Hazırlanıyor', desc: 'Lastikler depodan çıkarıldı', icon: Package },
     { title: 'Yola Çıktı', desc: 'Mobil montaj minibüsü hareket etti', icon: Truck },
-    { title: 'Kurulum Hazır', desc: 'Montaj uygulandı & dengelendi', icon: BadgeCheck },
+    { title: 'Teslim Edildi', desc: 'Siparişiniz başarıyla ulaştırıldı ve tamamlandı', icon: BadgeCheck },
   ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 animate-fadeIn">
       
       {/* Banner / Header containing Customer Avatar & Core Stats */}
-      <div className="relative bg-gradient-to-r from-[#1B1B1D] via-[#262629] to-[#101012] border border-[#262629] rounded-2xl p-6 sm:p-8 mb-10 overflow-hidden shadow-xl">
+      <div className="relative profile-banner border border-[#262629] rounded-2xl p-6 sm:p-8 mb-10 overflow-hidden shadow-xl">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#FF6A00]/5 rounded-full blur-3xl pointer-events-none" />
         
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
@@ -190,11 +190,6 @@ export default function UserProfile({
 
           <div className="flex gap-4 border-t border-[#262629] md:border-t-0 pt-4 md:pt-0 w-full md:w-auto justify-center">
             <div className="text-center font-mono">
-              <span className="text-xl font-bold block text-white">{fleet.length}</span>
-              <span className="text-[9px] text-gray-500 uppercase tracking-widest block">Araç Garajı</span>
-            </div>
-            <div className="h-10 w-[1px] bg-[#262629]" />
-            <div className="text-center font-mono">
               <span className="text-xl font-bold block text-white">{pastOrders.length + 1}</span>
               <span className="text-[9px] text-gray-500 uppercase tracking-widest block">Sipariş Sayısı</span>
             </div>
@@ -221,21 +216,6 @@ export default function UserProfile({
           SİPARİŞLERİM
           <span className="ml-1 px-2 py-0.5 text-[9.5px] font-mono font-black bg-[#262629] text-gray-300 rounded-full">
             {pastOrders.length + 1}
-          </span>
-        </button>
-
-        <button
-          onClick={() => setActiveProfileTab('garage')}
-          className={`flex items-center gap-2 px-5 py-3.5 border-b-2 font-display text-xs sm:text-sm font-black tracking-wider transition-all uppercase whitespace-nowrap ${
-            activeProfileTab === 'garage'
-              ? 'border-[#FF6A00] text-white bg-[#1B1B1D]/40'
-              : 'border-transparent text-gray-500 hover:text-gray-300'
-          }`}
-        >
-          <Car className="w-4 h-4 text-[#FF6A00]" />
-          GARAJIM
-          <span className="ml-1 px-2 py-0.5 text-[9.5px] font-mono font-black bg-[#262629] text-gray-300 rounded-full">
-            {fleet.length}
           </span>
         </button>
 
@@ -356,28 +336,82 @@ export default function UserProfile({
                   })}
                 </div>
 
-                <div className="p-4 bg-[#101012] border border-[#262629] rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-sans">
+                <div className="p-4 bg-[#101012] dark:bg-[#101012] light:bg-slate-50 border border-[#262629] dark:border-[#262629] light:border-slate-200 rounded-xl grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-sans">
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-mono text-gray-500 uppercase font-bold block">
+                    <span className="text-[10px] font-mono text-gray-500 dark:text-gray-500 light:text-slate-500 uppercase font-bold block">
                       TESLİMAT &amp; MONTAJ EKİBİ DETAYI
                     </span>
-                    <p className="text-white font-bold">{activeOrder.installationType}</p>
-                    <div className="flex items-center gap-2 text-gray-400">
+                    <p className="text-white dark:text-white light:text-slate-800 font-bold">{activeOrder.installationType}</p>
+                    <div className="flex items-center gap-2 text-gray-400 dark:text-gray-400 light:text-slate-600">
                       <Clock className="w-4 h-4 text-[#FF6A00]" />
-                      <span>Tahmini Varış: <strong className="text-white">{activeOrder.estimatedDelivery}</strong></span>
+                      <span>Tahmini Varış: <strong className="text-white dark:text-white light:text-slate-900">{activeOrder.estimatedDelivery}</strong></span>
                     </div>
                   </div>
 
-                  <div className="space-y-1.5 border-t sm:border-t-0 sm:border-l border-[#262629] pt-3 sm:pt-0 sm:pl-4">
-                    <span className="text-[10px] font-mono text-gray-500 uppercase font-bold block">
+                  <div className="space-y-1.5 border-t sm:border-t-0 sm:border-l border-[#262629] dark:border-[#262629] light:border-slate-200 pt-3 sm:pt-0 sm:pl-4">
+                    <span className="text-[10px] font-mono text-gray-500 dark:text-gray-500 light:text-slate-500 uppercase font-bold block">
                       SATIN ALINAN LASTİK TAKIMI
                     </span>
-                    <p className="text-white font-bold uppercase">
+                    <p className="text-white dark:text-white light:text-slate-800 font-bold uppercase">
                       {activeOrder.item.brand} {activeOrder.item.model}
                     </p>
-                    <p className="text-gray-400 font-mono text-[11px]">
+                    <p className="text-gray-400 dark:text-gray-400 light:text-slate-500 font-mono text-[11px]">
                       Boyut: {activeOrder.item.size} &bull; Adet: {activeOrder.item.qty} adet
                     </p>
+                  </div>
+                </div>
+
+                {/* DETAILED ACTIVE ORDER DETAILS PANEL */}
+                <div className="mt-5 p-5 bg-[#101012]/50 dark:bg-[#101012]/50 light:bg-slate-50/50 border border-[#262629]/70 dark:border-[#262629]/70 light:border-slate-200/80 rounded-xl font-sans text-xs text-left space-y-4">
+                  <div className="border-b border-[#262629]/50 dark:border-[#262629]/50 light:border-slate-200/50 pb-3 flex items-center justify-between font-mono">
+                    <span className="text-[11px] font-bold text-[#FF6A00] uppercase tracking-wider">
+                      Detaylı Sipariş &amp; Ödeme Bilgileri
+                    </span>
+                    <span className="text-[10px] text-emerald-500 font-bold uppercase bg-emerald-500/10 px-2 py-0.5 rounded">
+                      E-FATURA ONAYLI
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 leading-relaxed">
+                    <div className="space-y-3">
+                      <div>
+                        <span className="text-[10px] font-mono text-gray-500 dark:text-gray-500 light:text-slate-400 uppercase font-bold block">Teslimat &amp; Fatura Adresi</span>
+                        <div className="flex items-start gap-1.5 mt-1 text-gray-300 dark:text-gray-300 light:text-slate-700">
+                          <MapPin className="w-4 h-4 text-[#FF6A00] shrink-0 mt-0.5" />
+                          <span>{activeOrder.address}</span>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <span className="text-[10px] font-mono text-gray-500 dark:text-gray-500 light:text-slate-400 uppercase font-bold block">Ödeme Türü</span>
+                          <span className="text-white dark:text-white light:text-slate-800 font-semibold block mt-0.5">Kredi Kartı (**** 8822)</span>
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-mono text-gray-500 dark:text-gray-500 light:text-slate-400 uppercase font-bold block">Sipariş Tarihi</span>
+                          <span className="text-white dark:text-white light:text-slate-800 font-mono block mt-0.5">{activeOrder.date}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 border-t sm:border-t-0 sm:border-l border-[#262629]/60 dark:border-[#262629]/60 light:border-slate-200/70 pt-3 sm:pt-0 sm:pl-5 text-gray-400 dark:text-gray-400 light:text-slate-600 font-mono">
+                      <div className="flex justify-between">
+                        <span className="font-sans">Ürün Toplamı ({activeOrder.item.qty} Adet):</span>
+                        <span className="text-white dark:text-white light:text-slate-800 font-bold">${(activeOrder.item.price * activeOrder.item.qty).toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="font-sans">Kurulum &amp; Hizmet Bedeli:</span>
+                        <span className="text-white dark:text-white light:text-slate-800">$50.00</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="font-sans">KDV Dahil Oran (%20):</span>
+                        <span className="text-gray-500 dark:text-gray-500 light:text-slate-400">${(activeOrder.total * 0.1666).toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between border-t border-[#262629]/50 dark:border-[#262629]/50 light:border-slate-200/80 pt-2.5 mt-2.5">
+                        <span className="text-[#FF6A00] font-bold uppercase tracking-wider font-sans">Toplam Ödenen:</span>
+                        <span className="text-[#FF6A00] font-extrabold text-sm">${activeOrder.total.toFixed(2)}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -435,138 +469,6 @@ export default function UserProfile({
                   ))}
                 </div>
               </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB 2: GARAJIM */}
-        {activeProfileTab === 'garage' && (
-          <div className="max-w-4xl mx-auto animate-fadeIn text-left">
-            <div className="bg-[#1B1B1D] border border-[#262629] rounded-xl p-6 shadow-sm">
-              <div className="flex items-center justify-between border-b border-[#262629] pb-4 mb-6">
-                <div className="flex items-center gap-2.5">
-                  <Car className="w-5 h-5 text-[#FF6A00]" />
-                  <h3 className="font-display font-black text-white text-sm tracking-wide uppercase">
-                    Benim Garajım (Kayıtlı Araçlarım)
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setShowAddCar(!showAddCar)}
-                  className="flex items-center gap-1 text-[11px] font-mono font-bold text-[#FF6A00] hover:underline uppercase"
-                >
-                  <Plus className="w-4 h-4" />
-                  Yeni Araç Ekle
-                </button>
-              </div>
-
-              {/* Form to submit new vehicle */}
-              {showAddCar && (
-                <form onSubmit={handleAddCar} className="mb-6 p-5 bg-[#101012] border border-[#262629] rounded-lg space-y-4 animate-slideDown">
-                  <div className="flex justify-between items-center pb-2 border-b border-[#262629]">
-                    <h4 className="text-xs font-bold text-white font-mono uppercase">Yeni Araç Tanımlama ve Ölçü Sparingi</h4>
-                    <button 
-                      onClick={() => setShowAddCar(false)}
-                      className="text-gray-500 hover:text-white text-xs"
-                      type="button"
-                    >
-                      Kapat
-                    </button>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <input
-                      type="text"
-                      placeholder="Model Yılı (örn. 2021)"
-                      value={newCar.year}
-                      onChange={(e) => setNewCar({ ...newCar, year: e.target.value })}
-                      className="bg-[#1B1B1D] text-xs text-white p-2.5 rounded border border-[#262629] focus:outline-none focus:border-[#FF6A00]"
-                      required
-                    />
-                    <input
-                      type="text"
-                      placeholder="Marka (örn. BMW)"
-                      value={newCar.make}
-                      onChange={(e) => setNewCar({ ...newCar, make: e.target.value })}
-                      className="bg-[#1B1B1D] text-xs text-white p-2.5 rounded border border-[#262629] focus:outline-none focus:border-[#FF6A00]"
-                      required
-                    />
-                    <input
-                      type="text"
-                      placeholder="Seri / Model (örn. M3)"
-                      value={newCar.model}
-                      onChange={(e) => setNewCar({ ...newCar, model: e.target.value })}
-                      className="bg-[#1B1B1D] text-xs text-white p-2.5 rounded border border-[#262629] focus:outline-none focus:border-[#FF6A00]"
-                      required
-                    />
-                    <input
-                      type="text"
-                      placeholder="Donanım / Paket (örn. xDrive)"
-                      value={newCar.trim}
-                      onChange={(e) => setNewCar({ ...newCar, trim: e.target.value })}
-                      className="bg-[#1B1B1D] text-xs text-white p-2.5 rounded border border-[#262629] focus:outline-none focus:border-[#FF6A00]"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Standart Lastik Ebatı (örn. 255/35R19)"
-                      value={newCar.size}
-                      onChange={(e) => setNewCar({ ...newCar, size: e.target.value })}
-                      className="bg-[#1B1B1D] text-xs text-white sm:col-span-2 p-2.5 rounded border border-[#262629] focus:outline-none focus:border-[#FF6A00]"
-                      required
-                    />
-                  </div>
-                  <div className="flex justify-end gap-2 text-xs pt-1">
-                    <button
-                      type="submit"
-                      className="px-4 py-1.5 bg-[#FF6A00] text-black font-bold uppercase rounded font-mono"
-                    >
-                      Kayıt Et
-                    </button>
-                  </div>
-                </form>
-              )}
-
-              {/* List */}
-              {fleet.length === 0 ? (
-                <div className="py-12 text-center text-gray-500 font-mono text-xs border border-dashed border-[#262629] rounded-lg">
-                  Kayıtlı aracınız bulunmuyor. Kurulum önerilerimizi almak için bir araç ekleyin.
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {fleet.map((car) => (
-                    <div
-                      key={car.id}
-                      className="p-5 bg-[#101012] border border-[#262629]/50 rounded-lg flex items-start justify-between gap-4 group hover:border-[#FF6A00]/20 transition-all shadow-sm"
-                    >
-                      <div>
-                        <span className="text-[10px] bg-[#FF6A00]/10 text-[#FF6A00] font-mono font-black px-2 py-0.5 rounded block w-fit mb-2 uppercase">
-                          {car.year} {car.make}
-                        </span>
-                        <h4 className="font-display font-black text-white text-base uppercase leading-none">
-                          {car.model}
-                        </h4>
-                        <p className="text-xs text-gray-400 font-mono mt-1.5">
-                          Versiyon/Paket: {car.trim}
-                        </p>
-                        
-                        <div className="flex items-center gap-1.5 mt-4 pt-3 border-t border-[#262629]/50">
-                          <span className="text-[10px] text-gray-500 uppercase font-mono block">Ebat Ölçüsü:</span>
-                          <span className="text-xs font-mono font-bold text-[#FF6A00] underline uppercase">
-                            {car.tireSize}
-                          </span>
-                        </div>
-                      </div>
-
-                      <button
-                        onClick={() => handleDeleteCar(car.id)}
-                        className="p-1.5 text-gray-500 hover:text-red-500 rounded transition-colors"
-                        title="Aracı Garajdan Çıkar"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         )}
@@ -733,7 +635,7 @@ export default function UserProfile({
               </div>
 
               {/* Gold Racer Member Benefits Box */}
-              <div className="p-5 bg-gradient-to-br from-indigo-950/20 via-slate-900/10 to-transparent border border-indigo-500/20 rounded-xl space-y-2">
+              <div className="p-5 profile-gold-card border border-indigo-500/20 rounded-xl space-y-2">
                 <span className="text-[10px] bg-indigo-500/10 text-indigo-400 font-mono font-black px-2.5 py-0.5 rounded w-fit block uppercase">
                   GOLD RACER AVANTAJI AKTİF
                 </span>
@@ -805,7 +707,7 @@ export default function UserProfile({
             </div>
 
             <div className="lg:col-span-4">
-              <div className="p-5 bg-gradient-to-br from-[#1B1B1D] to-[#101012] border border-[#262629] rounded-xl space-y-3">
+              <div className="p-5 profile-gradient-card border border-[#262629] rounded-xl space-y-3">
                 <span className="text-[9px] bg-[#FF6A00]/10 text-[#FF6A00] font-mono font-black px-2 py-0.5 rounded w-fit block uppercase">
                   Kampanyalı Alışveriş
                 </span>
@@ -813,7 +715,7 @@ export default function UserProfile({
                   Favorilerinle Kombin Yap indirimleri Yakala
                 </p>
                 <p className="text-[10.5px] text-gray-400 leading-relaxed font-sans">
-                  Listendeki herhangi bir 4\'lü set lastik alımında Gold Racer sigorta paketine ek olarak anında sepette mobil usta montaj hizmeti hediye!
+                  Listendeki herhangi bir 4\'lü set lastik alımında Gold Racer sigorta paketine ek olarak anında sepette mobil usta montaj hizmeti entegre edilir!
                 </p>
               </div>
             </div>
